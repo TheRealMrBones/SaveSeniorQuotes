@@ -1,0 +1,18 @@
+{
+  "name": "saveseniorquotes",
+  "version": "1.0.0",
+  "description": "A website to save senior quotes by giving students the power to run it themselves",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Nolan Jones",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9",
+    "path": "^0.12.7"
+  }
+}
