@@ -13,6 +13,18 @@ app.get('/', async (req, res) => {
     res.render("index")
 });
 
+// Error Routes
+app.use(function(req, res, next) {
+    res.status(404);
+    res.render('404');
+});
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
+});
+
 // Listen
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
