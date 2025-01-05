@@ -1,0 +1,13 @@
+<html>
+    <%- include('./templates/head.ejs', {pageTitle: "Error 500"}) %>
+    <body>
+        <%- include('./templates/navbar.ejs') %>
+        <h2>Error 500: Internal server error</h2>
+        <a href="/">Home</a>
+        <% if(typeof errorMessage !== 'undefined') { %>
+            <p><%=errorMessage%></p>
+        <% } else { %>
+            <p>We encountered an internal server error. Please try again later.</p>
+        <% }%>
+    </body>
+</html>

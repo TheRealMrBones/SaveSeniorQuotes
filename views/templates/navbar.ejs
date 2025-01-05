@@ -1,0 +1,13 @@
+<div id="navbar" style="display: flex; justify-content: space-between;">
+    <div id="leftnavdiv">
+        <a href="/">Home</a>
+    </div>
+    <div id="rightnavdiv">
+        <% if(!username) { %>
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        <% } else { %>
+            <a href="/logout">Logout</a>
+        <% }%>
+    </div>
+</div>
