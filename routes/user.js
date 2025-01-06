@@ -64,21 +64,31 @@ router.post('/user/login', async (req, res) => {
     return res.status(result.error ? 401 : 200).json(result);
 });
 
+// Profile route
+router.get('/profile', (req, res) => {
+    if (!res.locals.username) {
+        res.redirect('/');
+    } else {
+        res.render('profile');
+    }
+});
+
 // Logout route
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 });
 
-router.get('/update-password', async (req, res) => {
+// Reset password route
+router.get('/resetpassword', async (req, res) => {
     if (!res.locals.username) {
         res.redirect('/');
     } else {
-        res.render('update-password');
+        res.render('resetpassword');
     }
 });
 
-router.post('/user/update-password', async (req, res) => {
+router.post('/user/resetpassword', async (req, res) => {
     let { password } = req.body;
     let userId = res.locals.userId;
 
