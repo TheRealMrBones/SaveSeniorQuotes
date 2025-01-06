@@ -1,8 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const validator = require('validator');
+const multer = require('multer');
+const fs = require('fs');
 
 const userController = require('../controllers/userController');
+
+// Multer config
+const pictureUpload = multer({
+    dest: './public/uploads/tmp',
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed!'), false);
+        }
+    },
+    limits: {
+        fileSize: 1024 * 1024,
+    },
+});
 
 // Register route
 router.get('/register', (req, res) => {
@@ -75,6 +92,7 @@ router.get('/profile', async (req, res) => {
         res.locals.firstname = user.firstname ?? "not set";
         res.locals.lastname = user.lastname ?? "not set";
         res.locals.quote = user.quote ?? "not set";
+        res.locals.picture = user.picture ?? "/public/missingpicture.png";
 
         res.render('profile');
     }
@@ -88,28 +106,39 @@ router.get('/updateprofile', (req, res) => {
         const userId = res.locals.userId;
         const user = userController.getUserById(userId);
 
-        res.locals.firstname = user.firstname ?? "not set";
-        res.locals.lastname = user.lastname ?? "not set";
-        res.locals.quote = user.quote ?? "not set";
+        res.locals.firstname = user.firstname;
+        res.locals.lastname = user.lastname;
+        res.locals.quote = user.quote;
+        res.locals.picture = user.picture;
 
         res.render('updateprofile');
     }
 });
 
-router.post('/user/updateprofile', async (req, res) => {
+router.post('/user/updateprofile', pictureUpload.single('picture'), async (req, res) => {
     try {
         const userId = res.locals.userId;
+        const username = res.locals.username;
 
         const { firstname, lastname, quote } = req.body;
 
-        const sanitizedFirstname = validator.trim(firstname);
-        const sanitizedLastname = validator.trim(lastname);
-        const sanitizedQuote = validator.trim(quote);
+        const sanitizedFirstname = firstname ? validator.trim(firstname) : null;
+        const sanitizedLastname = lastname ? validator.trim(lastname) : null;
+        const sanitizedQuote = quote ? validator.trim(quote) : null;
+
+        const { path, originalname } = req.file;
+        const newFilename = username + "." + originalname.split(".")[1];
+        const newFilepath = `./public/uploads/pictures/${newFilename}`;
+        fs.renameSync(path, newFilepath);
+
+        let pictureUrl = null;
+        if (req.file) pictureUrl = req.file.path;
 
         await userController.updateProfile(userId, {
             firstname: sanitizedFirstname,
             lastname: sanitizedLastname,
             quote: sanitizedQuote,
+            picture: pictureUrl,
         });
 
         res.redirect('/profile');

@@ -1,14 +1,39 @@
+var picturePreview = document.getElementById('picturePreview');
+
+/*if(picture){
+    picturePreview.setAttribute("src", picture);
+}*/
+
+function handleFileSelect(evt) {
+    var file = evt.target.files[0];
+
+    if (!file.type.match('image.*')) {
+        return;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = (function (theFile) {
+        return function (e) {
+            picturePreview.setAttribute("src", e.target.result);
+        };
+    })(file);
+
+    reader.readAsDataURL(file);
+}
+
+document.getElementById('pictureInput').addEventListener('change', handleFileSelect, false);
+
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("form").addEventListener("submit", function (event) {
+    const form = document.querySelector("form");
+
+    document.querySelector(form).addEventListener("submit", function (event) {
         event.preventDefault(); // Override normal for submission
 
-        var firstname = document.querySelector('[name="firstname"]').value;
-        var lastname = document.querySelector('[name="lastname"]').value;
-        var quote = document.querySelector('[name="quote"]').value;
+        const formData = new FormData(form);
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/user/updateprofile", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
@@ -22,12 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
-        var jsonData = JSON.stringify({
-            firstname: firstname,
-            lastname: lastname,
-            quote: quote,
-        });
-
-        xhr.send(jsonData);
+        xhr.send(formData);
     });
 });

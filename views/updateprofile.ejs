@@ -3,12 +3,16 @@
     <body>
         <%- include('./templates/navbar.ejs') %>
         <h2>Update Profile</h2>
-        <form action="/user/resetpassword" method="post">
-            <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname" required></p>
-            <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname" required></p>
-            <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote" required></p>
+        <form action="/user/updateprofile" method="post" enctype="multipart/form-data">
+            <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname"></p>
+            <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname"></p>
+            <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote"></p>
+            <p>Picture: <input id="pictureInput" type="file" name="picture" accept="images/*"></p>
+            <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;"><br>
             <button type="submit">Update Profile</button>
         </form>
+        <h2>Notice</h2>
+        <p>All profile changes go under review by moderation before being pushed to the database</p>
         
         <script src="public/js/showError.js"></script>
         <script src="public/js/updateprofile.js"></script>

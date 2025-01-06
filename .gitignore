@@ -137,9 +137,7 @@ public/uploads/*.png
 public/uploads/*.jpg
 public/uploads/tmp/*.png
 public/uploads/tmp/*.jpg
-public/uploads/mapart/*.png
-public/uploads/mapart/*.jpg
-public/uploads/mapart/tmp/*.png
-public/uploads/mapart/tmp/*.jpg
+public/uploads/pictures/*.png
+public/uploads/pictures/*.jpg
 
 public/uploads/tmp/*.js

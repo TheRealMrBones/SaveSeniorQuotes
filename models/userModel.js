@@ -164,6 +164,7 @@ const updateProfile = async (userId, {
     firstname,
     lastname,
     quote,
+    picture,
 }) => {
     try {
         return await prisma.user.update({
@@ -172,6 +173,7 @@ const updateProfile = async (userId, {
                 firstname,
                 lastname,
                 quote,
+                picture,
             }
         });
     } catch (error) {
