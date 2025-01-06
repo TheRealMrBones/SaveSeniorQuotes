@@ -99,12 +99,12 @@ router.get('/profile', async (req, res) => {
 });
 
 // Update profile route
-router.get('/updateprofile', (req, res) => {
+router.get('/updateprofile', async (req, res) => {
     if (!res.locals.username) {
         res.redirect('/');
     } else {
         const userId = res.locals.userId;
-        const user = userController.getUserById(userId);
+        const user = await userController.getUserById(userId);
 
         res.locals.firstname = user.firstname;
         res.locals.lastname = user.lastname;
@@ -119,6 +119,7 @@ router.post('/user/updateprofile', pictureUpload.single('picture'), async (req, 
     try {
         const userId = res.locals.userId;
         const username = res.locals.username;
+        const user = await userController.getUserById(userId);
 
         const { firstname, lastname, quote } = req.body;
 
@@ -126,19 +127,19 @@ router.post('/user/updateprofile', pictureUpload.single('picture'), async (req, 
         const sanitizedLastname = lastname ? validator.trim(lastname) : null;
         const sanitizedQuote = quote ? validator.trim(quote) : null;
 
-        const { path, originalname } = req.file;
-        const newFilename = username + "." + originalname.split(".")[1];
-        const newFilepath = `./public/uploads/pictures/${newFilename}`;
-        fs.renameSync(path, newFilepath);
-
-        let pictureUrl = null;
-        if (req.file) pictureUrl = req.file.path;
+        let newFilepath = null;
+        if(req.file){
+            const { path, originalname } = req.file;
+            const newFilename = username + "." + originalname.split(".")[1];
+            newFilepath = `/public/uploads/pictures/${newFilename}`;
+            fs.renameSync(path, "." + newFilepath);
+        }
 
         await userController.updateProfile(userId, {
-            firstname: sanitizedFirstname,
-            lastname: sanitizedLastname,
-            quote: sanitizedQuote,
-            picture: pictureUrl,
+            firstname: sanitizedFirstname ? sanitizedFirstname : user.firstname,
+            lastname: sanitizedLastname ? sanitizedLastname : user.lastname,
+            quote: sanitizedQuote ? sanitizedQuote : user.quote,
+            picture: newFilepath ? newFilepath : user.picture,
         });
 
         res.redirect('/profile');

@@ -1,9 +1,5 @@
 var picturePreview = document.getElementById('picturePreview');
 
-/*if(picture){
-    picturePreview.setAttribute("src", picture);
-}*/
-
 function handleFileSelect(evt) {
     var file = evt.target.files[0];
 

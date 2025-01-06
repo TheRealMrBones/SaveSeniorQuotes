@@ -5,6 +5,11 @@
         <h2>Profile</h2>
         <p>
             Username: <%=username%> <br>
+            <% if(typeof picture !== 'undefined') { %>
+                <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
+            <% } else { %>
+                <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
+            <% }%><br>
             First Name: <%=firstname%> <br>
             Last Name: <%=lastname%> <br>
             Quote: <%=quote%> <br><br>

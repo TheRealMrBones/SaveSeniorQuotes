@@ -4,11 +4,15 @@
         <%- include('./templates/navbar.ejs') %>
         <h2>Update Profile</h2>
         <form action="/user/updateprofile" method="post" enctype="multipart/form-data">
-            <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname"></p>
-            <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname"></p>
-            <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote"></p>
+            <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname" value="<%=firstname%>"></p>
+            <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname" value="<%=lastname%>"></p>
+            <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote" value="<%=quote%>"></p>
             <p>Picture: <input id="pictureInput" type="file" name="picture" accept="images/*"></p>
-            <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;"><br>
+            <% if(typeof picture !== 'undefined') { %>
+                <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
+            <% } else { %>
+                <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
+            <% }%><br>
             <button type="submit">Update Profile</button>
         </form>
         <h2>Notice</h2>
