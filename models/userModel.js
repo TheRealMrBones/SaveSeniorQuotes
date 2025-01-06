@@ -51,6 +51,16 @@ const newApiKey = async (userId) => {
     }
 };
 
+const getAccessLvl = async (userId) => {
+    try {
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+        return user?.accessLvl || 0;
+    } catch (error) {
+        console.error('Error in getAccessLvl:', error);
+        return false;
+    }
+};
+
 const getUserByUsername = async (username) => {
     try {
         return await prisma.user.findUnique({ where: { username: username } });
@@ -155,6 +165,7 @@ module.exports = {
     verifyApiKey,
     getUserByApiKey,
     newApiKey,
+    getAccessLvl,
     getUserByUsername,
     getUsernameById,
     getUserById,

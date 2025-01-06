@@ -19,6 +19,16 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   username  String   @unique
+  email     String   @unique
+  firstname String
+  lastname  String
+  quote     String?
+  picture   String?
   hashedPw  String?
+  accessLvl Int      @default(0)
+  review    Boolean  @default(false)
+  denied    Boolean  @default(false)
+  deniedMsg String?
+  accepted  Boolean  @default(false)
   apiKey    String?
 }

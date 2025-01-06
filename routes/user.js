@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const validator = require('validator');
+const {OAuth2Client} = require('google-auth-library');
 
 const userController = require('../controllers/userController');
 
@@ -43,25 +44,39 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/user/login', async (req, res) => {
-    let { username, password } = req.body;
+    res.header('Access-Control-Allow-Origin','http://localhost:3000');
+    res.header('Referrer-Policy','no-referrer-when-downgrade');
 
-    // Sanitize username
-    username = validator.trim(username);
-    username = validator.escape(username);
+    const redirectUrl = 'http://localhost:3000/user/oauth';
 
-    // Sanitize password
-    password = validator.trim(password);
-    password = validator.escape(password);
+    const oAuth2Client = new OAuth2Client(process.env.CLIENT_ID, process.env.CLIENT_SECRET, redirectUrl);
+    const authorizeUrl = oAuth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: 'https://www.googleapis.com/auth/userinfo.profile openid',
+        prompt: 'consent',
+    });
 
-    const lowercaseUsername = username.toLowerCase();
-    const result = await userController.loginUser(lowercaseUsername, password);
+    res.json({url: authorizeUrl});
+});
 
-    // Set cookie and update visit
-    if (result.token) {
-        res.cookie("token", result.token);
+async function getUserData(access_token){
+    const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token${access_token}`);
+    const data = await response.json();
+}
+
+router.get('/user/oauth', async (req, res, next) => {
+    const code = req.query.code;
+    try{
+        const redirectUrl = 'http://localhost:3000/user/oauth';
+        const oAuth2Client = new OAuth2Client(process.env.CLIENT_ID, process.env.CLIENT_SECRET, redirectUrl);
+        const res = await oAuth2Client.getToken(code);
+        await oAuth2Client.setCredentials(res.tokens);
+
+        const usercred = oAuth2Client.credentials;
+        await getUserData(usercred.access_token);
+    }catch(err){
+        console.log('Error signing in with Google');
     }
-
-    return res.status(result.error ? 401 : 200).json(result);
 });
 
 // Profile route

@@ -5,6 +5,7 @@ const path = require('path');
 
 const {
     setFilePath,
+    checkAccessLvl,
     checkUserStatus,
     requestLogger,
 } = require('./util/middleware');
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(setFilePath);
+app.use(checkAccessLvl);
 app.use(checkUserStatus);
 app.use(requestLogger);
 

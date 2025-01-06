@@ -9,6 +9,32 @@ const setFilePath = async (req, res, next) => {
     next();
 };
 
+/*
+Access Levels:
+
+0 - None (Can only view quotes)
+1 - Verified (Can submit quotes)
+2 - Mod (Can review submissions)
+3 - Admin (Can manage accounts and quotes)
+*/
+
+// Check access level middleware
+const checkAccessLvl = async (req, res, next) => {
+    try {
+        const userId = res.locals.userId;
+        if(!userId) return next();
+        const accessLvl = await userController.getAccessLvl(userId);
+
+        res.locals.accessLvl = accessLvl;
+
+        next();
+    } catch (error) {
+        console.error('Error checking access level:', error);
+        res.locals.accessLvl = 0;
+        next(error);
+    }
+};
+
 // Check user status middleware
 const checkUserStatus = async (req, res, next) => {
     const token = req.cookies.token;
@@ -68,6 +94,7 @@ const requestLogger = (req, res, next) => {
 
 module.exports = {
     setFilePath,
+    checkAccessLvl,
     checkUserStatus,
     requestLogger,
 };
