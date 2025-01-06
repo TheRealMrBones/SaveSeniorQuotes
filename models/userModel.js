@@ -174,6 +174,7 @@ const updateProfile = async (userId, {
                 lastname,
                 quote,
                 picture,
+                review: true,
             }
         });
     } catch (error) {

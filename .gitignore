@@ -129,15 +129,12 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# package info
 package-lock.json
 
+# custom
 .idea/
 /prisma/src/
-public/uploads/*.png
-public/uploads/*.jpg
-public/uploads/tmp/*.png
-public/uploads/tmp/*.jpg
-public/uploads/pictures/*.png
-public/uploads/pictures/*.jpg
-
-public/uploads/tmp/*.js
+public/uploads/pictures
+public/uploads/tmp
+!public/uploads/**/.placeholder
