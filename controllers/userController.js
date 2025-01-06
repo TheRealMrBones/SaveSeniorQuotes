@@ -179,13 +179,6 @@ const deleteUserById = async (userId) => {
     }
 };
 
-// Function to check if a string is alphanumeric
-const isAlphanumeric = (str) => /^[a-zA-Z0-9_]*$/.test(str);
-
-// Sanitize input
-const sanitizeInput = (input) => validator.escape(input);
-
-// Get userId from username
 const getIdFromUsername = async (username) => {
     try {
         const user = await userModel.getUserByUsername(username);
@@ -195,6 +188,21 @@ const getIdFromUsername = async (username) => {
         throw error;
     }
 };
+
+const updateProfile = async (userId, data) => {
+    try {
+        return await userModel.updateProfile(userId, data);
+    } catch (error) {
+        console.error('Error in updateProfile:', error);
+        throw error;
+    }
+};
+
+// Function to check if a string is alphanumeric
+const isAlphanumeric = (str) => /^[a-zA-Z0-9_]*$/.test(str);
+
+// Sanitize input
+const sanitizeInput = (input) => validator.escape(input);
 
 module.exports = {
     getApiKeyById,
@@ -212,4 +220,5 @@ module.exports = {
     getUserByApiKey,
     deleteUserById,
     getIdFromUsername,
+    updateProfile,
 };

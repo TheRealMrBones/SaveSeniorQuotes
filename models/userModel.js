@@ -160,6 +160,26 @@ const deleteUserById = async (userId) => {
     }
 };
 
+const updateProfile = async (userId, {
+    firstname,
+    lastname,
+    quote,
+}) => {
+    try {
+        return await prisma.user.update({
+            where: { id: userId },
+            data: {
+                firstname,
+                lastname,
+                quote,
+            }
+        });
+    } catch (error) {
+        console.error('Error in updateProfile:', error);
+        return null;
+    }
+};
+
 module.exports = {
     getApiKeyById,
     verifyApiKey,
@@ -173,4 +193,5 @@ module.exports = {
     createUser,
     updateUserPassword,
     deleteUserById,
+    updateProfile,
 };

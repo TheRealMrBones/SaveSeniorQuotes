@@ -1,10 +1,15 @@
 <html>
-    <%- include('./templates/head.ejs') %>
+    <%- include('./templates/head.ejs', {pageTitle: "Profile"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
         <h2>Profile</h2>
-        <h3>Username: <%=username%></h3>
-        <h3>Quote: <%=username%></h3>
+        <p>
+            Username: <%=username%> <br>
+            First Name: <%=firstname%> <br>
+            Last Name: <%=lastname%> <br>
+            Quote: <%=quote%> <br><br>
+            <a href="/updateprofile">Update Profile</a>
+        </p>
         <h2>Security</h2>
         <a href="/resetpassword">Reset Password</a>
     </body>

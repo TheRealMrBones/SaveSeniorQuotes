@@ -65,11 +65,57 @@ router.post('/user/login', async (req, res) => {
 });
 
 // Profile route
-router.get('/profile', (req, res) => {
+router.get('/profile', async (req, res) => {
     if (!res.locals.username) {
         res.redirect('/');
     } else {
+        const userId = res.locals.userId;
+        const user = await userController.getUserById(userId);
+
+        res.locals.firstname = user.firstname ?? "not set";
+        res.locals.lastname = user.lastname ?? "not set";
+        res.locals.quote = user.quote ?? "not set";
+
         res.render('profile');
+    }
+});
+
+// Update profile route
+router.get('/updateprofile', (req, res) => {
+    if (!res.locals.username) {
+        res.redirect('/');
+    } else {
+        const userId = res.locals.userId;
+        const user = userController.getUserById(userId);
+
+        res.locals.firstname = user.firstname ?? "not set";
+        res.locals.lastname = user.lastname ?? "not set";
+        res.locals.quote = user.quote ?? "not set";
+
+        res.render('updateprofile');
+    }
+});
+
+router.post('/user/updateprofile', async (req, res) => {
+    try {
+        const userId = res.locals.userId;
+
+        const { firstname, lastname, quote } = req.body;
+
+        const sanitizedFirstname = validator.trim(firstname);
+        const sanitizedLastname = validator.trim(lastname);
+        const sanitizedQuote = validator.trim(quote);
+
+        await userController.updateProfile(userId, {
+            firstname: sanitizedFirstname,
+            lastname: sanitizedLastname,
+            quote: sanitizedQuote,
+        });
+
+        res.redirect('/profile');
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
