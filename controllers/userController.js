@@ -1,5 +1,5 @@
 const userModel = require('../models/userModel');
-const bcrypt = require('bcrypt');
+const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
@@ -103,7 +103,7 @@ const registerUser = async (username, password) => {
     }
 
     try {
-        const hashedPw = await bcrypt.hash(password, 10);
+        const hashedPw = await argon2.hash(password);
 
         const user = await userModel.createUser({ username, hashedPw });
 
@@ -126,7 +126,7 @@ const loginUser = async (username, password) => {
             return { error: 'Invalid username or password' };
         }
 
-        const passwordMatch = await bcrypt.compare(password, user.hashedPw);
+        const passwordMatch = await argon2.verify(user.hashedPw, password);
         if (!passwordMatch) {
             return { error: 'Invalid username or password' };
         }
@@ -151,7 +151,7 @@ const verifyToken = (token) => {
 
 const updateUserPassword = async (userId, password) => {
     try {
-        const newHashedPw = await bcrypt.hash(password, 10);
+        const newHashedPw = await argon2.hash(password);
 
         return await userModel.updateUserPassword(userId, newHashedPw);
     } catch (error) {

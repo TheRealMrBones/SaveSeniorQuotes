@@ -1,8 +1,8 @@
-const shortid = require('shortid');
+const { nanoid } = require("nanoid");
 const db = require('../util/db');
 const prisma = db.prisma;
 
-const generateApiKey = () => shortid();
+const generateApiKey = () => nanoid();
 
 const getApiKeyById = async (userId) => {
     try {
