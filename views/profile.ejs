@@ -2,21 +2,34 @@
     <%- include('./templates/head.ejs', {pageTitle: "Profile"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h2>Profile</h2>
+
+        <h2>Quote</h2>
+        <%- include('./templates/quote.ejs', {
+            quotepicture: picture,
+            quotefirstname: firstname,
+            quotelastname: lastname,
+            quotequote: quote,
+        }) %>
+
+        <h2>Quote Submission</h2>
         <p>
-            Username: <%=username%> <br>
-            <% if(typeof picture !== 'undefined') { %>
-                <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
-            <% } else { %>
-                <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
+            Quote Submission Status: <% if(statusLvl == 0) { %>
+                Not submitted
+            <% } else if (statusLvl == 1) { %>
+                Pending review
+            <% } else if (statusLvl == 2) { %>
+                Denied <br>
+                Deny Reason: <%=deniedMsg%>
+            <% } else if (statusLvl == 3) { %>
+                Accepted
             <% }%> <br>
-            First Name: <%=firstname%> <br>
-            Last Name: <%=lastname%> <br>
-            Quote: <%=quote%> <br><br>
-            <a href="/updateprofile">Update Profile</a>
+
+            <a href="/updateprofile">Submit Quote</a>
         </p>
+
         <h2>Account Info</h2>
         <p>
+            Username: <%=username%> <br>
             Account type: <% if(accessLvl == 0) { %>
                 Student
             <% } else if (accessLvl == 1) { %>
@@ -30,18 +43,8 @@
             <% } else { %>
                 False
             <% }%> <br>
-            
-            Quote Submission Status: <% if(statusLvl == 0) { %>
-                Not submitted
-            <% } else if (statusLvl == 1) { %>
-                Pending review
-            <% } else if (statusLvl == 2) { %>
-                Denied <br>
-                Deny Reason: <%=deniedMsg%>
-            <% } else if (statusLvl == 3) { %>
-                Accepted
-            <% }%>
         </p>
+        
         <h2>Security</h2>
         <a href="/resetpassword">Reset Password</a>
     </body>

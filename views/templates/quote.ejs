@@ -1,0 +1,10 @@
+<div>
+    <% if(typeof quotepicture !== 'undefined') { %>
+        <img id="picturePreview" src="<%=quotepicture%>" alt="current profile picture" style="max-width: 100;">
+    <% } else { %>
+        <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
+    <% }%> <br>
+
+    <%=quotefirstname%> <%=quotelastname%> <br>
+    "<%=quotequote%>"
+</div>
