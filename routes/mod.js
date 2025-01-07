@@ -13,8 +13,13 @@ router.get('/*', (req, res, next) => {
 });
 
 // Review route
-router.get('/review', (req, res, next) => {
-    
+router.get('/review', async (req, res) => {
+    const page = req.query.page || 1;
+
+    res.locals.page = page;
+    res.locals.quotes = await userController.getQuotesPage(page, 25, true);
+
+    res.render("review")
 });
 
 module.exports = router;

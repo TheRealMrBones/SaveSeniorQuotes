@@ -5,8 +5,8 @@ const path = require('path');
 
 const {
     setFilePath,
-    checkAccessLvl,
     checkUserStatus,
+    checkAccessLvl,
     requestLogger,
 } = require('./util/middleware');
 

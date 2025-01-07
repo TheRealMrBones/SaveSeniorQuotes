@@ -1,0 +1,13 @@
+<div class="quote">
+    <%- include('./quote.ejs', {
+        quotepicture: q.picture,
+        quotefirstname: q.firstname,
+        quotelastname: q.lastname,
+        quotequote: q.quote,
+    }) %>
+
+    <p>
+        Username: <%=q.username%> <br>
+        User Id: <%=q.userId%> <br>
+    </p>
+</div>

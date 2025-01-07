@@ -224,12 +224,20 @@ const getQuotesPage = async (page, perPage, formods) => {
         const users = await userModel.getUsersPage(page, perPage, !formods, formods);
 
         return users.map(user => {
-            return {
+            const returnobject = {
                 picture: user.picture,
                 firstname: user.firstname,
                 lastname: user.lastname,
                 quote: user.quote,
             }
+
+            // only include user info if for mods
+            if (formods) {
+                returnobject.userId = user.id;
+                returnobject.username = user.username;
+            }
+
+            return returnobject;
         });
     } catch (error) {
         console.error('Error in getQuotesPage:', error);

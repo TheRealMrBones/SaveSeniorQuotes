@@ -171,10 +171,10 @@ router.post('/user/updateprofile', pictureUpload.single('picture'), async (req, 
         }
 
         await userController.updateProfile(userId, {
-            firstname: sanitizedFirstname ? sanitizedFirstname : user.firstname,
-            lastname: sanitizedLastname ? sanitizedLastname : user.lastname,
-            quote: sanitizedQuote ? sanitizedQuote : user.quote,
-            picture: newFilepath ? newFilepath : user.picture,
+            firstname: sanitizedFirstname ?? user.firstname,
+            lastname: sanitizedLastname ?? user.lastname,
+            quote: sanitizedQuote ?? user.quote,
+            picture: newFilepath ?? user.picture,
         });
 
         res.redirect('/profile');

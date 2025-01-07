@@ -1,9 +1,9 @@
 <html>
-    <%- include('./templates/head.ejs', {pageTitle: "Gallery"}) %>
+    <%- include('./templates/head.ejs', {pageTitle: "Review"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
 
-        <h1>Gallery Page <%=page%></h1>
+        <h1>Review Page <%=page%></h1>
         <% if(quotes.length >= 25) { %>
             <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
         <% } %>
@@ -12,11 +12,8 @@
         <% } %>
         <div id="gridContainer">
             <% quotes.forEach(function(q) { %>
-                <%- include('./templates/quote.ejs', {
-                    quotepicture: q.picture,
-                    quotefirstname: q.firstname,
-                    quotelastname: q.lastname,
-                    quotequote: q.quote,
+                <%- include('./templates/reviewquote.ejs', {
+                    q: q
                 }) %>
             <% }); %>
         </div>
@@ -30,11 +27,11 @@
             var page = <%=page%>;
 
             function nextpage(){
-                window.location.href = "/gallery?page=" + (page + 1);
+                window.location.href = "/mod/review?page=" + (page + 1);
             }
 
             function prevpage(){
-                window.location.href = "/gallery?page=" + (page - 1);
+                window.location.href = "/mod/review?page=" + (page - 1);
             }
         </script>
     </body>

@@ -21,11 +21,10 @@ function handleFileSelect(evt) {
 document.getElementById('pictureInput').addEventListener('change', handleFileSelect, false);
 
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-
-    document.querySelector(form).addEventListener("submit", function (event) {
+    document.querySelector("form").addEventListener("submit", function (event) {
         event.preventDefault(); // Override normal for submission
 
+        const form = document.querySelector("form");
         const formData = new FormData(form);
 
         var xhr = new XMLHttpRequest();

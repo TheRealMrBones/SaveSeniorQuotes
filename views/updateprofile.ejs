@@ -8,7 +8,7 @@
             <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname" value="<%=lastname%>"></p>
             <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote" value="<%=quote%>"></p>
             <p>Picture: <input id="pictureInput" type="file" name="picture" accept="images/*"></p>
-            <% if(typeof picture !== 'undefined') { %>
+            <% if(picture) { %>
                 <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
             <% } else { %>
                 <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">

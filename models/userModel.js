@@ -1,8 +1,9 @@
-const { nanoid } = require("nanoid");
+const crypto = require('crypto');
+const fs = require('fs');
 const db = require('../util/db');
 const prisma = db.prisma;
 
-const generateApiKey = () => nanoid();
+const generateApiKey = () => crypto.randomUUID();
 
 const getApiKeyById = async (userId) => {
     try {
@@ -167,6 +168,11 @@ const updateProfile = async (userId, {
     picture,
 }) => {
     try {
+        if (picture) {
+            if (!fs.existsSync("." + picture))
+                picture = null;
+        }
+
         return await prisma.user.update({
             where: { id: userId },
             data: {

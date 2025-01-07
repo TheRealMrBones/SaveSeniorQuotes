@@ -9,26 +9,6 @@ const setFilePath = async (req, res, next) => {
     next();
 };
 
-// Check access level middleware
-const checkAccessLvl = async (req, res, next) => {
-    try {
-        const userId = res.locals.userId;
-        if (!userId) {
-            res.locals.accessLvl = 0;
-            next();
-        }
-        const accessLvl = await userController.getAccessLvl(userId);
-
-        res.locals.accessLvl = accessLvl;
-
-        next();
-    } catch (error) {
-        console.error('Error checking access level:', error);
-        res.locals.accessLvl = 0;
-        next(error);
-    }
-};
-
 // Check user status middleware
 const checkUserStatus = async (req, res, next) => {
     const token = req.cookies.token;
@@ -68,6 +48,24 @@ const checkUserStatus = async (req, res, next) => {
     next();
 };
 
+// Check access level middleware
+const checkAccessLvl = async (req, res, next) => {
+    try {
+        const userId = res.locals.userId;
+        if (!userId) {
+            res.locals.accessLvl = 0;
+        }else{
+            res.locals.accessLvl = await userController.getAccessLvl(userId);
+        }
+
+        next();
+    } catch (error) {
+        console.error('Error checking access level:', error);
+        res.locals.accessLvl = 0;
+        next(error);
+    }
+};
+
 // Console.log requests into the terminal
 const requestLogger = (req, res, next) => {
     const timestamp = moment().format('MM-DD HH:mm:ss');
@@ -88,7 +86,7 @@ const requestLogger = (req, res, next) => {
 
 module.exports = {
     setFilePath,
-    checkAccessLvl,
     checkUserStatus,
+    checkAccessLvl,
     requestLogger,
 };
