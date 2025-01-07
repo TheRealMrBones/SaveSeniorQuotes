@@ -209,7 +209,7 @@ const sendVerif = async (userId) => {
 
 const getUsersPage = async (page, perPage) => {
     try {
-        const users = await userModel.getUsersPage(page, perPage);
+        const users = await userModel.getUsersPage(page, perPage, false);
         
         return users;
     } catch (error) {
@@ -220,7 +220,7 @@ const getUsersPage = async (page, perPage) => {
 
 const getQuotesPage = async (page, perPage) => {
     try {
-        const users = await userModel.getUsersPage(page, perPage);
+        const users = await userModel.getUsersPage(page, perPage, true);
 
         return users.map(user => {
             return {

@@ -195,8 +195,11 @@ const sendVerif = async (userId) => {
     }
 };
 
-const getUsersPage = async (page, perPage) => {
+const getUsersPage = async (page, perPage, onlyaccepted) => {
     try {
+        let where = null;
+        if (onlyaccepted)
+            where = { statusLvl: { equals: 3 } };
         let orderBy = { lastname: 'desc' };
 
         // Adjust pagination if necessary
@@ -213,6 +216,7 @@ const getUsersPage = async (page, perPage) => {
 
         // Fetch all quotes
         const users = await prisma.user.findMany({
+            where,
             orderBy,
             skip,
             take,
