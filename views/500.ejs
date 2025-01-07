@@ -2,7 +2,7 @@
     <%- include('./templates/head.ejs', {pageTitle: "Error 500"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h2>Error 500: Internal server error</h2>
+        <h1>Error 500: Internal server error</h1>
         <a href="/">Home</a>
         <% if(typeof errorMessage !== 'undefined') { %>
             <p><%=errorMessage%></p>

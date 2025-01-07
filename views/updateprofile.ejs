@@ -2,7 +2,7 @@
     <%- include('./templates/head.ejs', {pageTitle: "Update Profile"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h2>Update Profile</h2>
+        <h1>Update Profile</h1>
         <form action="/user/updateprofile" method="post" enctype="multipart/form-data">
             <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname" value="<%=firstname%>"></p>
             <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname" value="<%=lastname%>"></p>

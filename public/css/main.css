@@ -1,0 +1,13 @@
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: blanchedalmond;
+    padding: 5px;
+}
+
+.quote{
+    text-align: center;
+    border: 3px solid black;
+    width: fit-content;
+    padding: 5px;
+}
