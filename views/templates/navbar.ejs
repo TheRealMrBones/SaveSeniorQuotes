@@ -4,6 +4,14 @@
         <a href="/gallery">Gallery</a>
     </div>
     <div id="rightnavdiv">
+        <% if(accessLvl >= 2) { %>
+
+        <% }%>
+
+        <% if(accessLvl >= 1) { %>
+            <a href="/mod/review">Review</a>
+        <% }%>
+
         <% if(!username) { %>
             <a href="/register">Register</a>
             <a href="/login">Login</a>

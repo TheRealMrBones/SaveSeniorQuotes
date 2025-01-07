@@ -6,9 +6,22 @@
 }
 
 .quote{
+    margin: 0 auto;
     text-align: center;
     border: 3px solid black;
     width: fit-content;
+    padding: 5px;
+}
+
+.review{
+    text-align: center;
+    border: 3px solid black;
+    width: fit-content;
+    padding: 5px;
+}
+
+.quoteholder{
+    display: flex;
     padding: 5px;
 }
 

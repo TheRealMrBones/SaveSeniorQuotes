@@ -10,7 +10,7 @@
         <% if(page > 1) { %>
             <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
         <% } %>
-        <div id="gridContainer">
+        <div class="quoteholder">
             <% quotes.forEach(function(q) { %>
                 <%- include('./templates/quote.ejs', {
                     quotepicture: q.picture,
