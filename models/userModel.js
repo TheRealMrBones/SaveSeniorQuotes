@@ -174,7 +174,7 @@ const updateProfile = async (userId, {
                 lastname,
                 quote,
                 picture,
-                review: true,
+                statusLvl: 1, // pending review from mods
             }
         });
     } catch (error) {

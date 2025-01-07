@@ -14,6 +14,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/*
+
+Access Levels:
+0 - None (Can only view quotes)
+1 - Mod (Can review submissions)
+2 - Admin (Can manage accounts and quotes)
+
+Status Levels:
+0 - Not submitted
+1 - Pending review
+2 - Denied
+3 - Accepted
+
+*/
+
 model User {
   id        String   @id @default(uuid()) @map("_id")
   createdAt DateTime @default(now())
@@ -25,9 +40,8 @@ model User {
   picture   String?
   hashedPw  String?
   accessLvl Int      @default(0)
-  review    Boolean  @default(false)
-  denied    Boolean  @default(false)
+  verified  Boolean  @default(false)
+  statusLvl Int      @default(0)
   deniedMsg String?
-  accepted  Boolean  @default(false)
   apiKey    String?
 }

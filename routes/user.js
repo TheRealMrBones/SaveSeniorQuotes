@@ -94,6 +94,10 @@ router.get('/profile', async (req, res) => {
         res.locals.quote = user.quote ?? "not set";
         res.locals.picture = user.picture ?? "/public/missingpicture.png";
 
+        res.locals.verified = user.verified;
+        res.locals.statusLvl = user.statusLvl;
+        res.locals.deniedMsg = user.deniedMsg;
+
         res.render('profile');
     }
 });

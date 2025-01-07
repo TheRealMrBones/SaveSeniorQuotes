@@ -9,15 +9,6 @@ const setFilePath = async (req, res, next) => {
     next();
 };
 
-/*
-Access Levels:
-
-0 - None (Can only view quotes)
-1 - Verified (Can submit quotes)
-2 - Mod (Can review submissions)
-3 - Admin (Can manage accounts and quotes)
-*/
-
 // Check access level middleware
 const checkAccessLvl = async (req, res, next) => {
     try {

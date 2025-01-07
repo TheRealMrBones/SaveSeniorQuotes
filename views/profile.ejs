@@ -9,11 +9,38 @@
                 <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
             <% } else { %>
                 <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
-            <% }%><br>
+            <% }%> <br>
             First Name: <%=firstname%> <br>
             Last Name: <%=lastname%> <br>
             Quote: <%=quote%> <br><br>
             <a href="/updateprofile">Update Profile</a>
+        </p>
+        <h2>Account Info</h2>
+        <p>
+            Account type: <% if(accessLvl == 0) { %>
+                Student
+            <% } else if (accessLvl == 1) { %>
+                Moderator
+            <% } else if (accessLvl == 2) { %>
+                Admin
+            <% }%> <br>
+
+            Account verified: <% if(verified) { %>
+                True
+            <% } else { %>
+                False
+            <% }%> <br>
+            
+            Quote Submission Status: <% if(statusLvl == 0) { %>
+                Not submitted
+            <% } else if (statusLvl == 1) { %>
+                Pending review
+            <% } else if (statusLvl == 2) { %>
+                Denied <br>
+                Deny Reason: <%=deniedMsg%>
+            <% } else if (statusLvl == 3) { %>
+                Accepted
+            <% }%>
         </p>
         <h2>Security</h2>
         <a href="/resetpassword">Reset Password</a>
