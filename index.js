@@ -37,6 +37,9 @@ app.use('/', userRoutes);
 const modRoutes = require('./routes/mod');
 app.use('/mod', modRoutes);
 
+const adminRoutes = require('./routes/admin');
+app.use('/admin', adminRoutes);
+
 // Serve Homepage
 app.get('/', async (req, res) => {
     res.locals.quotes = await userController.getQuotesPage(1, 25, false);
