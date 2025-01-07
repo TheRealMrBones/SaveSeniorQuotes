@@ -11,3 +11,15 @@
     width: fit-content;
     padding: 5px;
 }
+
+.erroralert{
+    width: fit-content;
+    background-color: lightcoral;
+    padding: 5px;
+}
+
+.successalert{
+    width: fit-content;
+    background-color: lightgreen;
+    padding: 5px;
+}
