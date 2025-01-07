@@ -36,7 +36,7 @@ app.use('/', userRoutes);
 
 // Serve Homepage
 app.get('/', async (req, res) => {
-    res.locals.quotes = await userController.getQuotesPage(1, 25);
+    res.locals.quotes = await userController.getQuotesPage(1, 25, false);
 
     res.render("index")
 });
@@ -46,7 +46,7 @@ app.get('/gallery', async (req, res) => {
     const page = req.query.page || 1;
 
     res.locals.page = page;
-    res.locals.quotes = await userController.getQuotesPage(page, 25);
+    res.locals.quotes = await userController.getQuotesPage(page, 25, false);
 
     res.render("gallery")
 });

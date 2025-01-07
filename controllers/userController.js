@@ -209,7 +209,7 @@ const sendVerif = async (userId) => {
 
 const getUsersPage = async (page, perPage) => {
     try {
-        const users = await userModel.getUsersPage(page, perPage, false);
+        const users = await userModel.getUsersPage(page, perPage, false, false);
         
         return users;
     } catch (error) {
@@ -218,9 +218,10 @@ const getUsersPage = async (page, perPage) => {
     }
 };
 
-const getQuotesPage = async (page, perPage) => {
+const getQuotesPage = async (page, perPage, formods) => {
     try {
-        const users = await userModel.getUsersPage(page, perPage, true);
+        // if not for mods get only accepted if for mods get only review
+        const users = await userModel.getUsersPage(page, perPage, !formods, formods);
 
         return users.map(user => {
             return {

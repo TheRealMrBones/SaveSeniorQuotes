@@ -195,12 +195,17 @@ const sendVerif = async (userId) => {
     }
 };
 
-const getUsersPage = async (page, perPage, onlyaccepted) => {
+const getUsersPage = async (page, perPage, onlyaccepted, onlyreview) => {
     try {
         let where = null;
         if (onlyaccepted)
             where = { statusLvl: { equals: 3 } };
-        let orderBy = { lastname: 'desc' };
+        else if(onlyreview)
+            where = { statusLvl: { equals: 1 } };
+
+        let orderBy = { lastname: 'asc' };
+        if (onlyreview)
+            orderBy = { updatedAt: 'desc' };
 
         // Adjust pagination if necessary
         let skip = 0;
