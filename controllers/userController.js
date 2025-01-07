@@ -207,6 +207,35 @@ const sendVerif = async (userId) => {
     }
 };
 
+const getUsersPage = async (page, perPage) => {
+    try {
+        const users = await userModel.getUsersPage(page, perPage);
+        
+        return users;
+    } catch (error) {
+        console.error('Error in getUsersPage:', error);
+        throw error;
+    }
+};
+
+const getQuotesPage = async (page, perPage) => {
+    try {
+        const users = await userModel.getUsersPage(page, perPage);
+
+        return users.map(user => {
+            return {
+                picture: user.picture,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                quote: user.quote,
+            }
+        });
+    } catch (error) {
+        console.error('Error in getQuotesPage:', error);
+        throw error;
+    }
+};
+
 // Function to check if a string is alphanumeric
 const isAlphanumeric = (str) => /^[a-zA-Z0-9_]*$/.test(str);
 
@@ -231,4 +260,6 @@ module.exports = {
     getIdFromUsername,
     updateProfile,
     sendVerif,
+    getUsersPage,
+    getQuotesPage,
 };

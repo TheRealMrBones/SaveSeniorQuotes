@@ -3,7 +3,39 @@
     <body>
         <%- include('./templates/navbar.ejs') %>
 
-        <h1>Gallery</h1>
-        <div id="gridContainer"></div>
+        <h1>Gallery Page <%=page%></h1>
+        <% if(quotes.length >= 25) { %>
+            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+        <% } %>
+        <% if(page > 1) { %>
+            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+        <% } %>
+        <div id="gridContainer">
+            <% quotes.forEach(function(q) { %>
+                <%- include('./templates/quote.ejs', {
+                    quotepicture: q.picture,
+                    quotefirstname: q.firstname,
+                    quotelastname: q.lastname,
+                    quotequote: q.quote,
+                }) %>
+            <% }); %>
+        </div>
+        <% if(quotes.length >= 25) { %>
+            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+        <% } %>
+        <% if(page > 1) { %>
+            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+        <% } %>
+        <script>
+            var page = <%=page%>;
+
+            function nextpage(){
+                window.location.href = "/gallery?page=" + (page + 1);
+            }
+
+            function prevpage(){
+                window.location.href = "/gallery?page=" + (page - 1);
+            }
+        </script>
     </body>
 </html>

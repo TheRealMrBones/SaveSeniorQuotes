@@ -8,6 +8,23 @@
         <p>Currently the only school supported is Carmel High School (Carmel, Indiana)</p>
 
         <h1>Gallery</h1>
-        <div id="gridContainer"></div>
+        <div id="gridContainer">
+            <% quotes.forEach(function(q) { %>
+                <%- include('./templates/quote.ejs', {
+                    quotepicture: q.picture,
+                    quotefirstname: q.firstname,
+                    quotelastname: q.lastname,
+                    quotequote: q.quote,
+                }) %>
+            <% }); %>
+        </div>
+        <% if(quotes.length >= 25) { %>
+        <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+        <script>
+            function nextpage(){
+                window.location.href = "/gallery?page=2"
+            }
+        </script>
+        <% } %>
     </body>
 </html>

@@ -195,6 +195,36 @@ const sendVerif = async (userId) => {
     }
 };
 
+const getUsersPage = async (page, perPage) => {
+    try {
+        let orderBy = { lastname: 'desc' };
+
+        // Adjust pagination if necessary
+        let skip = 0;
+        let take = Number.MAX_SAFE_INTEGER; // Maximum safe integer
+        if (page && perPage) {
+            skip = (page - 1) * perPage;
+            take = perPage;
+        } else if (page && !perPage) {
+            // If page is provided but perPage is not, use a default value for perPage
+            take = 25; // Default value for perPage
+            skip = (page - 1) * take;
+        }
+
+        // Fetch all quotes
+        const users = await prisma.user.findMany({
+            orderBy,
+            skip,
+            take,
+        });
+
+        return users;
+    } catch (error) {
+        console.error('Error in getUsersPage:', error);
+        return null;
+    }
+};
+
 module.exports = {
     getApiKeyById,
     verifyApiKey,
@@ -210,4 +240,5 @@ module.exports = {
     deleteUserById,
     updateProfile,
     sendVerif,
+    getUsersPage,
 };

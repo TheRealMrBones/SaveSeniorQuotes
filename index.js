@@ -10,6 +10,8 @@ const {
     requestLogger,
 } = require('./util/middleware');
 
+const userController = require('./controllers/userController');
+
 // Init Express
 const app = express();
 const port = 3000;
@@ -34,7 +36,19 @@ app.use('/', userRoutes);
 
 // Serve Homepage
 app.get('/', async (req, res) => {
+    res.locals.quotes = await userController.getQuotesPage(1, 25);
+
     res.render("index")
+});
+
+// Serve Gallery
+app.get('/gallery', async (req, res) => {
+    const page = req.query.page || 1;
+
+    res.locals.page = page;
+    res.locals.quotes = await userController.getQuotesPage(page, 25);
+
+    res.render("gallery")
 });
 
 // Error Routes
