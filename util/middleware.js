@@ -13,7 +13,10 @@ const setFilePath = async (req, res, next) => {
 const checkAccessLvl = async (req, res, next) => {
     try {
         const userId = res.locals.userId;
-        if(!userId) return next();
+        if (!userId) {
+            res.locals.accessLvl = 0;
+            next();
+        }
         const accessLvl = await userController.getAccessLvl(userId);
 
         res.locals.accessLvl = accessLvl;
