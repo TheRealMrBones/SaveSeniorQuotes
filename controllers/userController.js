@@ -198,6 +198,15 @@ const updateProfile = async (userId, data) => {
     }
 };
 
+const sendVerif = async (userId) => {
+    try {
+        return await userModel.sendVerif(userId);
+    } catch (error) {
+        console.error('Error in sendVerif:', error);
+        throw error;
+    }
+};
+
 // Function to check if a string is alphanumeric
 const isAlphanumeric = (str) => /^[a-zA-Z0-9_]*$/.test(str);
 
@@ -221,4 +230,5 @@ module.exports = {
     deleteUserById,
     getIdFromUsername,
     updateProfile,
+    sendVerif,
 };

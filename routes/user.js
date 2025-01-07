@@ -102,6 +102,31 @@ router.get('/profile', async (req, res) => {
     }
 });
 
+// Verify route
+router.get('/verify', async (req, res) => {
+    if (!res.locals.username) {
+        res.redirect('/');
+    } else {
+        const userId = res.locals.userId;
+        const user = await userController.getUserById(userId);
+        
+        // fill in later
+
+        res.render('verify');
+    }
+});
+
+router.post('/user/verify', async (req, res) => {
+    try {
+        const userId = res.locals.userId;
+        await userController.sendVerif(userId);
+        res.redirect('/updateprofile');
+    } catch (error) {
+        console.error('Error verifying identity:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 // Update profile route
 router.get('/updateprofile', async (req, res) => {
     if (!res.locals.username) {
@@ -109,6 +134,12 @@ router.get('/updateprofile', async (req, res) => {
     } else {
         const userId = res.locals.userId;
         const user = await userController.getUserById(userId);
+
+        // redirect to verification if needed
+        if (!user.sentVerif) {
+            res.redirect('/verify');
+            return;
+        }
 
         res.locals.firstname = user.firstname;
         res.locals.lastname = user.lastname;

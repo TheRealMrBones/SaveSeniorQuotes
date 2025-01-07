@@ -183,6 +183,18 @@ const updateProfile = async (userId, {
     }
 };
 
+const sendVerif = async (userId) => {
+    try {
+        return await prisma.user.update({
+            where: { id: userId },
+            data: { sentVerif: true }
+        });
+    } catch (error) {
+        console.error('Error in sendVerif:', error);
+        return null;
+    }
+};
+
 module.exports = {
     getApiKeyById,
     verifyApiKey,
@@ -197,4 +209,5 @@ module.exports = {
     updateUserPassword,
     deleteUserById,
     updateProfile,
+    sendVerif,
 };
