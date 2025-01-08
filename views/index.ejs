@@ -2,8 +2,13 @@
     <%- include('./templates/head.ejs') %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-
-        <% if(statusLvl == 0 && username) { %>
+        <% if(!username) { %>
+            <div class="submissionstatusaccepted">
+                Looks like you aren't logged in. <br>
+                If you want to submit your senior quote create an account! <br><br>
+                <a href="/register">Create an Account</a>
+            </div>
+        <% } else if(statusLvl == 0 && username) { %>
             <div class="submissionstatusdenied">
                 Quote Submission Status: Not submitted <br>
                 Go through the quote submission process to join your peers! <br><br>
