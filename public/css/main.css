@@ -5,6 +5,12 @@
     padding: 5px;
 }
 
+.picture{
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+
 .quote{
     margin: 0 auto;
     text-align: center;
