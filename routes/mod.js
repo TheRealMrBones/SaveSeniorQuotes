@@ -22,4 +22,12 @@ router.get('/review', async (req, res) => {
     res.render("review")
 });
 
+router.post('/review', async (req, res) => {
+    let { userId, accept, reason } = req.body;
+
+    const result = await userController.submitReview(userId, accept, reason);
+
+    return res.status(result.error ? 401 : 201).json(result);
+});
+
 module.exports = router;

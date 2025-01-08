@@ -1,4 +1,4 @@
-<div class="review">
+<div id="<%=q.userId%>" class="review">
     <%- include('./quote.ejs', {
         quotepicture: q.picture,
         quotefirstname: q.firstname,
@@ -8,6 +8,8 @@
 
     <p>
         Username: <%=q.username%> <br>
-        User Id: <%=q.userId%> <br>
     </p>
+    <button onclick="acceptquote('<%=q.userId%>')">Accept</button>
+    <button onclick="denyquote('<%=q.userId%>')">Deny</button> <br>
+    <input id="<%=q.userId%>-denyreason" type="text" placeholder="Deny Reason">
 </div>

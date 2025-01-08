@@ -245,6 +245,15 @@ const getQuotesPage = async (page, perPage, formods) => {
     }
 };
 
+const submitReview = async (userId, accept, reason) => {
+    try {
+        return await userModel.submitReview(userId, accept, reason);
+    } catch (error) {
+        console.error('Error in submitReview:', error);
+        throw error;
+    }
+};
+
 // Function to check if a string is alphanumeric
 const isAlphanumeric = (str) => /^[a-zA-Z0-9_]*$/.test(str);
 
@@ -271,4 +280,5 @@ module.exports = {
     sendVerif,
     getUsersPage,
     getQuotesPage,
+    submitReview,
 };

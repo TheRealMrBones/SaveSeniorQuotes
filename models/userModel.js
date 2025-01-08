@@ -240,6 +240,21 @@ const getUsersPage = async (page, perPage, onlyaccepted, onlyreview) => {
     }
 };
 
+const submitReview = async (userId, accept, reason) => {
+    try {
+        return await prisma.user.update({
+            where: { id: userId },
+            data: {
+                statusLvl: accept ? 3 : 2,
+                deniedMsg: reason,
+            }
+        });
+    } catch (error) {
+        console.error('Error in sendVerif:', error);
+        return null;
+    }
+};
+
 module.exports = {
     getApiKeyById,
     verifyApiKey,
@@ -256,4 +271,5 @@ module.exports = {
     updateProfile,
     sendVerif,
     getUsersPage,
+    submitReview,
 };
