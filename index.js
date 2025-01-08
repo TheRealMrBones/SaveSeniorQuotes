@@ -47,8 +47,11 @@ app.get('/', async (req, res) => {
     const userId = res.locals.userId;
     const user = await userController.getUserById(userId);
 
-    res.locals.statusLvl = user.statusLvl;
-    res.locals.deniedMsg = user.deniedMsg;
+    res.locals.statusLvl = 0;
+    if(user){
+        res.locals.statusLvl = user.statusLvl;
+        res.locals.deniedMsg = user.deniedMsg;
+    }
 
     res.render("index")
 });

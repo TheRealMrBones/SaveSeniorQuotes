@@ -3,7 +3,13 @@
     <body>
         <%- include('./templates/navbar.ejs') %>
 
-        <% if(statusLvl == 1) { %>
+        <% if(statusLvl == 0 && username) { %>
+            <div class="submissionstatusdenied">
+                Quote Submission Status: Not submitted <br>
+                Go through the quote submission process to join your peers! <br><br>
+                <a href="/updateprofile">Submit Quote</a>
+            </div>
+        <% } else if(statusLvl == 1) { %>
             <div class="submissionstatusreview">
                 Quote Submission Status: Pending review <br>
                 Make sure to check back in later and see if the quote gets accepted or denied.

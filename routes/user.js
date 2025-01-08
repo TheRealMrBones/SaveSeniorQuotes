@@ -101,7 +101,7 @@ router.get('/profile', async (req, res) => {
         res.locals.submissionstatusclass = "";
         if(user.statusLvl == 1){
             res.locals.submissionstatusclass = "submissionstatusreview";
-        }else if(user.statusLvl == 2){
+        }else if(user.statusLvl == 2 || user.statusLvl == 0){
             res.locals.submissionstatusclass = "submissionstatusdenied";
         }else if(user.statusLvl == 3){
             res.locals.submissionstatusclass = "submissionstatusaccepted";

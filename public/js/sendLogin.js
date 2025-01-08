@@ -19,7 +19,7 @@ function sendLogin(username, password) {
                 // Check if login was successful
                 if (data.token) {
                     // Redirect to a new page or perform other actions
-                    window.location.href = "/"; // Change this URL as needed
+                    window.location.href = "/profile"; // Change this URL as needed
                 } else {
                     // Display the error message from the server
                     showError("Login failed: " + data.error);
