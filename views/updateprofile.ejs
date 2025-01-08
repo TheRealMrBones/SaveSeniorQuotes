@@ -2,6 +2,16 @@
     <%- include('./templates/head.ejs', {pageTitle: "Update Profile"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
+
+        <h1>How to get your school photo</h1>
+        <p>
+            To verify you're identity please do the following: <br>
+            1. Open this link: <a href="https://carmel.instructure.com/files/folder/users_9532/profile%20pictures" target="_blank">Canvas</a> <br>
+            2. Log in with the canvas prompt <br>
+            3. Download your profile picture from the screen (3 dots button on the far right of image) <br>
+            4. Press the Verify Identity and use your image for the quote submission! <br>
+        </p>
+
         <h1>Update Profile</h1>
         <form action="/user/updateprofile" method="post" enctype="multipart/form-data">
             <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname" value="<%=firstname%>"></p>
