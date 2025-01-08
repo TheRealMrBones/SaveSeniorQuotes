@@ -44,6 +44,12 @@ app.use('/admin', adminRoutes);
 app.get('/', async (req, res) => {
     res.locals.quotes = await userController.getQuotesPage(1, 25, false);
 
+    const userId = res.locals.userId;
+    const user = await userController.getUserById(userId);
+
+    res.locals.statusLvl = user.statusLvl;
+    res.locals.denyMsg = user.denyMsg;
+
     res.render("index")
 });
 

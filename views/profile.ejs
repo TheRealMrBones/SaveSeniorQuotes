@@ -13,20 +13,21 @@
         }) %>
 
         <h2>Quote Submission</h2>
-        <p>
+        <div class="<%=submissionstatusclass%>">
             Quote Submission Status: <% if(statusLvl == 0) { %>
                 Not submitted
             <% } else if (statusLvl == 1) { %>
-                Pending review
+                Pending review <br>
+                Make sure to check back in later and see if the quote gets accepted or denied.
             <% } else if (statusLvl == 2) { %>
                 Denied <br>
-                Deny Reason: <%=deniedMsg%>
+                Deny Reason: <%=deniedMsg%> <br>
+                Resubmit a new quote to go back into review!
             <% } else if (statusLvl == 3) { %>
                 Accepted
-            <% }%> <br>
-
-            <a href="/updateprofile">Submit Quote</a>
-        </p>
+            <% }%>
+        </div>
+        <p><a href="/updateprofile">Submit Quote</a></p>
 
         <h2>Account Info</h2>
         <p>

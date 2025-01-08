@@ -98,6 +98,15 @@ router.get('/profile', async (req, res) => {
         res.locals.statusLvl = user.statusLvl;
         res.locals.deniedMsg = user.deniedMsg;
 
+        res.locals.submissionstatusclass = "";
+        if(user.statusLvl == 1){
+            res.locals.submissionstatusclass = "submissionstatusreview";
+        }else if(user.statusLvl == 2){
+            res.locals.submissionstatusclass = "submissionstatusdenied";
+        }else if(user.statusLvl == 3){
+            res.locals.submissionstatusclass = "submissionstatusaccepted";
+        }
+
         res.render('profile');
     }
 });

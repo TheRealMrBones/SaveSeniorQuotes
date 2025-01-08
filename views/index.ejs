@@ -2,6 +2,25 @@
     <%- include('./templates/head.ejs') %>
     <body>
         <%- include('./templates/navbar.ejs') %>
+
+        <% if(statusLvl == 1) { %>
+            <div class="submissionstatusreview">
+                Quote Submission Status: Pending review <br>
+                Make sure to check back in later and see if the quote gets accepted or denied.
+            </div>
+        <% } else if(statusLvl == 2) { %>
+            <div class="submissionstatusdenied">
+                Quote Submission Status: Denied <br>
+                Deny Reason: <%=deniedMsg%> <br>
+                Resubmit a new quote to go back into review! <br><br>
+                <a href="/updateprofile">Resubmit Quote</a>
+            </div>
+        <% } else if(statusLvl == 3) { %>
+            <div class="submissionstatusaccepted">
+                Quote Submission Status: Accepted
+            </div>
+        <% } %>
+
         <h1>Save Senior Quotes</h1>
         <h2>Developed by: Nolan Jones</h2>
         <p>This is place where students who's schools do not have senior quotes can run their own.</p>

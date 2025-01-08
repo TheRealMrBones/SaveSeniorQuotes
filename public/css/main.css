@@ -31,6 +31,24 @@
     padding: 5px;
 }
 
+.submissionstatusreview{
+    width: fit-content;
+    padding: 5px;
+    background-color: blanchedalmond;
+}
+
+.submissionstatusdenied{
+    width: fit-content;
+    padding: 5px;
+    background-color: lightcoral;
+}
+
+.submissionstatusaccepted{
+    width: fit-content;
+    padding: 5px;
+    background-color: lightgreen;
+}
+
 .erroralert{
     width: fit-content;
     background-color: lightcoral;
