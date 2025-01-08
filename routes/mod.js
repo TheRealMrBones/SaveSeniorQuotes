@@ -23,6 +23,10 @@ router.get('/review', async (req, res) => {
 });
 
 router.post('/review', async (req, res) => {
+    if (res.locals.accessLvl < 1) {
+        return;
+    }
+
     let { userId, accept, reason } = req.body;
 
     const result = await userController.submitReview(userId, accept, reason);
