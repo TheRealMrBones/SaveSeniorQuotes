@@ -1,12 +1,5 @@
 const form = document.querySelector('form');
 
-form.addEventListener('keypress', function (event) {
-    if (event.key.toLowerCase() == "enter" && event.target.tagName.toLowerCase() == "input" && event.target.type.toLowerCase() == "text") {
-        event.preventDefault();
-        form.submit();
-    }
-});
-
 function showError(message) {
     // Display error using Bootstrap alert
     var alertDiv = document.createElement("div");

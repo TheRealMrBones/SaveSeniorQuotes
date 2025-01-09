@@ -15,6 +15,7 @@ function sendLogin(username, password) {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var data = JSON.parse(xhr.responseText);
+                console.log(data);
 
                 // Check if login was successful
                 if (data.token) {
