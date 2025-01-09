@@ -12,22 +12,28 @@
 }
 
 .quote{
+    display: inline-block;
     margin: 0 auto;
     text-align: center;
     border: 3px solid black;
     width: fit-content;
     padding: 5px;
+    margin: 5px;
+    width: 150px;
+    vertical-align: top;
 }
 
 .review{
+    display: inline-block;
     text-align: center;
     border: 3px solid black;
     width: fit-content;
     padding: 5px;
+    margin: 5px;
+    vertical-align: top;
 }
 
 .quoteholder{
-    display: flex;
     padding: 5px;
 }
 
