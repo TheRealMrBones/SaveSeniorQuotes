@@ -1,8 +1,8 @@
 <div class="quote">
-    <% if(typeof quotepicture !== 'undefined') { %>
+    <% if(quotepicture != null) { %>
         <img id="picturePreview" class="picture" src="<%=quotepicture%>" alt="current profile picture">
     <% } else { %>
-        <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
+        <img id="picturePreview" class="picture" src="/public/missingpicture.png" alt="current profile picture">
     <% }%> <br>
 
     <%=quotefirstname%> <%=quotelastname%> <br>
