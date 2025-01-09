@@ -87,8 +87,8 @@ const registerUser = async (username, password) => {
     password = sanitizeInput(password);
 
     // Validate username
-    if (username.length < 3 || username.length > 16 || !isAlphanumeric(username)) {
-        return { error: 'Invalid username. It must be 3-16 characters only letters, numbers, and underscores.' };
+    if (username.length < 3 || username.length > 20 || !isAlphanumeric(username)) {
+        return { error: 'Invalid username. It must be 3-20 characters only letters, numbers, and underscores.' };
     }
 
     const existingUser = await userModel.getUserByUsername(username);

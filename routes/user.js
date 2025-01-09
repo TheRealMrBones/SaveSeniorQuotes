@@ -167,9 +167,9 @@ router.post('/user/updateprofile', pictureUpload.single('picture'), async (req, 
 
         const { firstname, lastname, quote } = req.body;
 
-        const sanitizedFirstname = firstname ? validator.trim(firstname) : null;
-        const sanitizedLastname = lastname ? validator.trim(lastname) : null;
-        const sanitizedQuote = quote ? validator.trim(quote) : null;
+        const sanitizedFirstname = firstname ? validator.trim(firstname).substring(0, Math.min(20, firstname.length)) : null;
+        const sanitizedLastname = lastname ? validator.trim(lastname).substring(0, Math.min(20, lastname.length)) : null;
+        const sanitizedQuote = quote ? validator.trim(quote).substring(0, Math.min(200, quote.length)) : null;
 
         let newFilepath = null;
         if(req.file){
