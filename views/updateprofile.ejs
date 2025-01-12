@@ -4,8 +4,8 @@
         <%- include('./templates/navbar.ejs') %>
         <div class="container containermain">
             <h1>How to get your school photo</h1>
-            <p>
-                To verify you're identity please do the following: <br>
+            <p style="margin: 0 auto; text-align: left; width: fit-content;">
+                <strong>To verify you're identity please do the following:</strong> <br><br>
                 1. Open this link: <a href="https://carmel.instructure.com/files/folder/users_9532/profile%20pictures" target="_blank">Canvas</a> <br>
                 2. Log in with the canvas prompt <br>
                 3. Download your profile picture from the screen (3 dots button on the far right of image) <br>
@@ -14,17 +14,17 @@
     
             <h1>Update Profile</h1>
             <form action="/user/updateprofile" method="post" enctype="multipart/form-data">
-                <p>First Name: <input id="firstnameInput" type="text" placeholder="Enter First Name" name="firstname" value="<%=firstname%>" maxlength="20"></p>
-                <p>Last Name: <input id="lastnameInput" type="text" placeholder="Enter Last Name" name="lastname" value="<%=lastname%>" maxlength="20"></p>
-                <p>Quote: <input id="quoteInput" type="text" placeholder="Enter Quote" name="quote" value="<%=quote%>" maxlength="200"></p>
+                <input id="firstnameInput" class="textinput" type="text" placeholder="Enter First Name" name="firstname" value="<%=firstname%>" maxlength="20" style="display: inline-block;">
+                <input id="lastnameInput" class="textinput" type="text" placeholder="Enter Last Name" name="lastname" value="<%=lastname%>" maxlength="20" style="display: inline-block;">
+                <input id="quoteInput" class="textinput" type="text" placeholder="Enter Quote" name="quote" value="<%=quote%>" maxlength="200" style="display: block; margin-top: 0; width: 30rem;">
                 <p>Picture: <input id="pictureInput" type="file" name="picture" accept="images/*"></p>
                 <% if(picture) { %>
-                    <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="max-width: 100;">
+                    <img id="picturePreview" src="<%=picture%>" alt="current profile picture" style="width: 170px;">
                 <% } else { %>
-                    <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="max-width: 100;">
-                <% }%><br>
+                    <img id="picturePreview" src="/public/missingpicture.png" alt="current profile picture" style="width: 170px;">
+                <% }%><br><br>
                 <button type="submit">Update Profile</button>
-                <br><a href="/profile">Cancel</a>
+                <a href="/profile"><button>Cancel</button></a>
             </form>
             <h2>Notice</h2>
             <p>All profile changes go under review by moderation before being pushed to the database</p>

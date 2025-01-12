@@ -7,13 +7,14 @@
                 <div class="alert alertgreen">
                     Looks like you aren't logged in. <br>
                     If you want to submit your senior quote create an account! <br><br>
-                    <a href="/register">Create an Account</a>
+                    <a href="/register"><button>Create an Account</button></a>
+                    <a href="/login"><button>Login</button></a>
                 </div>
             <% } else if(statusLvl == 0 && username) { %>
                 <div class="alert alertred">
                     Quote Submission Status: Not submitted <br>
                     Go through the quote submission process to join your peers! <br><br>
-                    <a href="/updateprofile">Submit Quote</a>
+                    <a href="/updateprofile"><button>Submit Quote</button></a>
                 </div>
             <% } else if(statusLvl == 1) { %>
                 <div class="alert alertgreen">
@@ -25,7 +26,7 @@
                     Quote Submission Status: Denied <br>
                     Deny Reason: <%=deniedMsg%> <br>
                     Resubmit a new quote to go back into review! <br><br>
-                    <a href="/updateprofile">Resubmit Quote</a>
+                    <a href="/updateprofile"><button>Resubmit Quote</button></a>
                 </div>
             <% } else if(statusLvl == 3) { %>
                 <div class="alert alertgreen">
