@@ -2,18 +2,20 @@
     <%- include('./templates/head.ejs', {pageTitle: "Verify Identity"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h1>Verify Identity</h1>
-        <p>
-            To verify you're identity please do the following: <br>
-            1. Open this link: <a href="https://carmel.instructure.com/files/folder/users_9532/profile%20pictures" target="_blank">Canvas</a> <br>
-            2. Log in with the canvas prompt <br>
-            3. Download your profile picture from the screen (3 dots button on the far right of image) <br>
-            4. Press the Verify Identity and use your image for the quote submission! <br>
-        </p>
-        <form action="/user/verify" method="post">
-            <button type="submit">Verify Identity</button>
-        </form>
-        
-        <script src="public/js/form.js"></script>
+        <div class="container containermain">
+            <h1>Verify Identity</h1>
+            <p>
+                To verify you're identity please do the following: <br>
+                1. Open this link: <a href="https://carmel.instructure.com/files/folder/users_9532/profile%20pictures" target="_blank">Canvas</a> <br>
+                2. Log in with the canvas prompt <br>
+                3. Download your profile picture from the screen (3 dots button on the far right of image) <br>
+                4. Press the Verify Identity and use your image for the quote submission! <br>
+            </p>
+            <form action="/user/verify" method="post">
+                <button type="submit">Verify Identity</button>
+            </form>
+            
+            <script src="public/js/form.js"></script>
+        </div>
     </body>
 </html>

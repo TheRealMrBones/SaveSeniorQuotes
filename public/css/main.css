@@ -1,8 +1,46 @@
+body{
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    background-color: white;
+}
+
+a{
+    text-decoration: none;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 #navbar{
     display: flex;
     justify-content: space-between;
-    background-color: blanchedalmond;
-    padding: 5px;
+    align-items: center;
+    background-color: black;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.navbaritem{
+    color: white;
+    font-size: 1.4rem;
+    margin: 5px 5px;
+}
+
+.containermain{
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .picture{
@@ -36,32 +74,22 @@
     padding: 5px;
 }
 
-.submissionstatusreview{
-    width: fit-content;
-    padding: 5px;
-    background-color: blanchedalmond;
+.alert{
+    text-align: left;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
 }
 
-.submissionstatusdenied{
-    width: fit-content;
-    padding: 5px;
-    background-color: lightcoral;
+.alertgreen{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
 
-.submissionstatusaccepted{
-    width: fit-content;
-    padding: 5px;
-    background-color: lightgreen;
-}
-
-.erroralert{
-    width: fit-content;
-    background-color: lightcoral;
-    padding: 5px;
-}
-
-.successalert{
-    width: fit-content;
-    background-color: lightgreen;
-    padding: 5px;
+.alertred{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb
 }

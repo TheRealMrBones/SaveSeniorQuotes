@@ -2,91 +2,92 @@
     <%- include('./templates/head.ejs', {pageTitle: "Review"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
+        <div class="container containermain">
+            <h1>Review Page <%=page%></h1>
+            <% if(quotes.length >= 25) { %>
+                <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+            <% } %>
+            <% if(page > 1) { %>
+                <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+            <% } %>
+            <div class="quoteholder">
+                <% quotes.forEach(function(q) { %>
+                    <%- include('./templates/reviewquote.ejs', {
+                        q: q
+                    }) %>
+                <% }); %>
+            </div>
+            <% if(quotes.length >= 25) { %>
+                <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+            <% } %>
+            <% if(page > 1) { %>
+                <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+            <% } %>
+            <script>
+                var page = <%=page%>;
 
-        <h1>Review Page <%=page%></h1>
-        <% if(quotes.length >= 25) { %>
-            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
-        <% } %>
-        <% if(page > 1) { %>
-            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
-        <% } %>
-        <div class="quoteholder">
-            <% quotes.forEach(function(q) { %>
-                <%- include('./templates/reviewquote.ejs', {
-                    q: q
-                }) %>
-            <% }); %>
+                function nextpage(){
+                    window.location.href = "/mod/review?page=" + (page + 1);
+                }
+
+                function prevpage(){
+                    window.location.href = "/mod/review?page=" + (page - 1);
+                }
+
+                // accept and deny buttons
+                function acceptquote(userId){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/mod/review", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4) {
+                            if (xhr.status == 201) {
+                                document.getElementById(userId).remove();
+                            } else {
+                                // Handle other server errors or HTTP status codes
+                                //showError("Failed to make the login request. Please try again later.");
+                            }
+                        }
+                    };
+
+                    // Convert the data to JSON format
+                    var jsonData = JSON.stringify({
+                        userId: userId,
+                        accept: true,
+                    });
+
+                    // Send the request
+                    xhr.send(jsonData);
+                }
+
+                function denyquote(userId){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/mod/review", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4) {
+                            if (xhr.status == 201) {
+                                document.getElementById(userId).remove();
+                            } else {
+                                // Handle other server errors or HTTP status codes
+                                //showError("Failed to make the login request. Please try again later.");
+                            }
+                        }
+                    };
+
+                    // Convert the data to JSON format
+                    var jsonData = JSON.stringify({
+                        userId: userId,
+                        accept: false,
+                        reason: document.getElementById(userId + "-denyreason").value,
+                    });
+
+                    // Send the request
+                    xhr.send(jsonData);
+                }
+            </script>
         </div>
-        <% if(quotes.length >= 25) { %>
-            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
-        <% } %>
-        <% if(page > 1) { %>
-            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
-        <% } %>
-        <script>
-            var page = <%=page%>;
-
-            function nextpage(){
-                window.location.href = "/mod/review?page=" + (page + 1);
-            }
-
-            function prevpage(){
-                window.location.href = "/mod/review?page=" + (page - 1);
-            }
-
-            // accept and deny buttons
-            function acceptquote(userId){
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/mod/review", true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status == 201) {
-                            document.getElementById(userId).remove();
-                        } else {
-                            // Handle other server errors or HTTP status codes
-                            //showError("Failed to make the login request. Please try again later.");
-                        }
-                    }
-                };
-
-                // Convert the data to JSON format
-                var jsonData = JSON.stringify({
-                    userId: userId,
-                    accept: true,
-                });
-
-                // Send the request
-                xhr.send(jsonData);
-            }
-
-            function denyquote(userId){
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/mod/review", true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status == 201) {
-                            document.getElementById(userId).remove();
-                        } else {
-                            // Handle other server errors or HTTP status codes
-                            //showError("Failed to make the login request. Please try again later.");
-                        }
-                    }
-                };
-
-                // Convert the data to JSON format
-                var jsonData = JSON.stringify({
-                    userId: userId,
-                    accept: false,
-                    reason: document.getElementById(userId + "-denyreason").value,
-                });
-
-                // Send the request
-                xhr.send(jsonData);
-            }
-        </script>
     </body>
 </html>

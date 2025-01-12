@@ -1,23 +1,23 @@
 <div id="navbar">
-    <div id="leftnavdiv">
-        <a href="/">Home</a>
-        <a href="/gallery">Gallery</a>
+    <div id="leftnavdiv" class="navbarsection">
+        <a href="/" class="navbaritem">Home</a>
+        <a href="/gallery" class="navbaritem">Gallery</a>
     </div>
-    <div id="rightnavdiv">
+    <div id="rightnavdiv" class="navbarsection">
         <% if(accessLvl >= 2) { %>
 
         <% }%>
 
         <% if(accessLvl >= 1) { %>
-            <a href="/mod/review">Review</a>
+            <a href="/mod/review" class="navbaritem">Review</a>
         <% }%>
 
         <% if(!username) { %>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
+            <a href="/register" class="navbaritem">Register</a>
+            <a href="/login" class="navbaritem">Login</a>
         <% } else { %>
-            <a href="/profile">Profile</a>
-            <a href="/logout">Logout</a>
+            <a href="/profile" class="navbaritem">Profile</a>
+            <a href="/logout" class="navbaritem">Logout</a>
         <% }%>
     </div>
 </div>

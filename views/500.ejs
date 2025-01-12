@@ -2,12 +2,14 @@
     <%- include('./templates/head.ejs', {pageTitle: "Error 500"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h1>Error 500: Internal server error</h1>
-        <a href="/">Home</a>
-        <% if(typeof errorMessage !== 'undefined') { %>
-            <p><%=errorMessage%></p>
-        <% } else { %>
-            <p>We encountered an internal server error. Please try again later.</p>
-        <% }%>
+        <div class="container containermain">
+            <h1>Error 500: Internal server error</h1>
+            <a href="/">Home</a>
+            <% if(typeof errorMessage !== 'undefined') { %>
+                <p><%=errorMessage%></p>
+            <% } else { %>
+                <p>We encountered an internal server error. Please try again later.</p>
+            <% }%>
+        </div>
     </body>
 </html>

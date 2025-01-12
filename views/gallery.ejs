@@ -2,40 +2,41 @@
     <%- include('./templates/head.ejs', {pageTitle: "Gallery"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
+        <div class="container containermain">
+            <h1>Gallery Page <%=page%></h1>
+            <% if(quotes.length >= 25) { %>
+                <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+            <% } %>
+            <% if(page > 1) { %>
+                <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+            <% } %>
+            <div class="quoteholder">
+                <% quotes.forEach(function(q) { %>
+                    <%- include('./templates/quote.ejs', {
+                        quotepicture: q.picture,
+                        quotefirstname: q.firstname,
+                        quotelastname: q.lastname,
+                        quotequote: q.quote,
+                    }) %>
+                <% }); %>
+            </div>
+            <% if(quotes.length >= 25) { %>
+                <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
+            <% } %>
+            <% if(page > 1) { %>
+                <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
+            <% } %>
+            <script>
+                var page = <%=page%>;
 
-        <h1>Gallery Page <%=page%></h1>
-        <% if(quotes.length >= 25) { %>
-            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
-        <% } %>
-        <% if(page > 1) { %>
-            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
-        <% } %>
-        <div class="quoteholder">
-            <% quotes.forEach(function(q) { %>
-                <%- include('./templates/quote.ejs', {
-                    quotepicture: q.picture,
-                    quotefirstname: q.firstname,
-                    quotelastname: q.lastname,
-                    quotequote: q.quote,
-                }) %>
-            <% }); %>
+                function nextpage(){
+                    window.location.href = "/gallery?page=" + (page + 1);
+                }
+
+                function prevpage(){
+                    window.location.href = "/gallery?page=" + (page - 1);
+                }
+            </script>
         </div>
-        <% if(quotes.length >= 25) { %>
-            <button id="galleryNextButton" onclick="nextpage()">Next Page</button>
-        <% } %>
-        <% if(page > 1) { %>
-            <button id="galleryPrevButton" onclick="prevpage()">Prev Page</button>
-        <% } %>
-        <script>
-            var page = <%=page%>;
-
-            function nextpage(){
-                window.location.href = "/gallery?page=" + (page + 1);
-            }
-
-            function prevpage(){
-                window.location.href = "/gallery?page=" + (page - 1);
-            }
-        </script>
     </body>
 </html>

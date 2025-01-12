@@ -2,53 +2,54 @@
     <%- include('./templates/head.ejs', {pageTitle: "Profile"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-
-        <h1>Profile</h1>
-        <h2>Quote</h2>
-        <%- include('./templates/quote.ejs', {
-            quotepicture: picture,
-            quotefirstname: firstname,
-            quotelastname: lastname,
-            quotequote: quote,
-        }) %>
-
-        <h2>Quote Submission</h2>
-        <div class="<%=submissionstatusclass%>">
-            Quote Submission Status: <% if(statusLvl == 0) { %>
-                Not submitted <br>
-                Go through the quote submission process to join your peers!
-            <% } else if (statusLvl == 1) { %>
-                Pending review <br>
-                Make sure to check back in later and see if the quote gets accepted or denied.
-            <% } else if (statusLvl == 2) { %>
-                Denied <br>
-                Deny Reason: <%=deniedMsg%> <br>
-                Resubmit a new quote to go back into review!
-            <% } else if (statusLvl == 3) { %>
-                Accepted
-            <% }%>
+        <div class="container containermain">
+            <h1>Profile</h1>
+            <h2>Quote</h2>
+            <%- include('./templates/quote.ejs', {
+                quotepicture: picture,
+                quotefirstname: firstname,
+                quotelastname: lastname,
+                quotequote: quote,
+            }) %>
+    
+            <h2>Quote Submission</h2>
+            <div class="<%=submissionstatusclass%>">
+                Quote Submission Status: <% if(statusLvl == 0) { %>
+                    Not submitted <br>
+                    Go through the quote submission process to join your peers!
+                <% } else if (statusLvl == 1) { %>
+                    Pending review <br>
+                    Make sure to check back in later and see if the quote gets accepted or denied.
+                <% } else if (statusLvl == 2) { %>
+                    Denied <br>
+                    Deny Reason: <%=deniedMsg%> <br>
+                    Resubmit a new quote to go back into review!
+                <% } else if (statusLvl == 3) { %>
+                    Accepted
+                <% }%>
+            </div>
+            <p><a href="/updateprofile">Submit Quote</a></p>
+    
+            <h2>Account Info</h2>
+            <p>
+                Username: <%=username%> <br>
+                Account type: <% if(accessLvl == 0) { %>
+                    Student
+                <% } else if (accessLvl == 1) { %>
+                    Moderator
+                <% } else if (accessLvl == 2) { %>
+                    Admin
+                <% }%> <br>
+    
+                Account verified: <% if(verified) { %>
+                    True
+                <% } else { %>
+                    False
+                <% }%> <br>
+            </p>
+            
+            <h2>Security</h2>
+            <a href="/resetpassword">Reset Password</a>
         </div>
-        <p><a href="/updateprofile">Submit Quote</a></p>
-
-        <h2>Account Info</h2>
-        <p>
-            Username: <%=username%> <br>
-            Account type: <% if(accessLvl == 0) { %>
-                Student
-            <% } else if (accessLvl == 1) { %>
-                Moderator
-            <% } else if (accessLvl == 2) { %>
-                Admin
-            <% }%> <br>
-
-            Account verified: <% if(verified) { %>
-                True
-            <% } else { %>
-                False
-            <% }%> <br>
-        </p>
-        
-        <h2>Security</h2>
-        <a href="/resetpassword">Reset Password</a>
     </body>
 </html>

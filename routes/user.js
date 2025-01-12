@@ -100,11 +100,11 @@ router.get('/profile', async (req, res) => {
 
         res.locals.submissionstatusclass = "";
         if(user.statusLvl == 1){
-            res.locals.submissionstatusclass = "submissionstatusreview";
+            res.locals.submissionstatusclass = "alert alertgreen";
         }else if(user.statusLvl == 2 || user.statusLvl == 0){
-            res.locals.submissionstatusclass = "submissionstatusdenied";
+            res.locals.submissionstatusclass = "alert alertred";
         }else if(user.statusLvl == 3){
-            res.locals.submissionstatusclass = "submissionstatusaccepted";
+            res.locals.submissionstatusclass = "alert alertgreen";
         }
 
         res.render('profile');

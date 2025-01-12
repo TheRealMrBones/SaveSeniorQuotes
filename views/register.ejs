@@ -2,16 +2,18 @@
     <%- include('./templates/head.ejs', {pageTitle: "Register"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h1>Register</h1>
-        <form action="/user/register" method="post">
-            <input id="usernameInput" type="text" placeholder="Enter Username" name="username" maxlength="20" required>
-            <input id="passwordInput" type="password" placeholder="Enter Password" name="password" required>
-            <input id="confirmPasswordInput" type="password" placeholder="Confirm Password" name="confirmPassword" required>
-            <button type="submit">Register</button>
-        </form>
-        
-        <script src="public/js/form.js"></script>
-        <script src="public/js/sendLogin.js"></script>
-        <script src="public/js/register.js"></script>
+        <div class="container containermain">
+            <h1>Register</h1>
+            <form action="/user/register" method="post">
+                <input id="usernameInput" type="text" placeholder="Enter Username" name="username" maxlength="20" required>
+                <input id="passwordInput" type="password" placeholder="Enter Password" name="password" required>
+                <input id="confirmPasswordInput" type="password" placeholder="Confirm Password" name="confirmPassword" required>
+                <button type="submit">Register</button>
+            </form>
+            
+            <script src="public/js/form.js"></script>
+            <script src="public/js/sendLogin.js"></script>
+            <script src="public/js/register.js"></script>
+        </div>
     </body>
 </html>

@@ -3,7 +3,7 @@ const form = document.querySelector('form');
 function showError(message) {
     // Display error using Bootstrap alert
     var alertDiv = document.createElement("div");
-    alertDiv.className = "erroralert";
+    alertDiv.className = "alert alertred";
     alertDiv.textContent = message;
 
     // Insert the alert above the form
@@ -18,7 +18,7 @@ function showError(message) {
 function showSuccess(message) {
     // Display error using Bootstrap alert
     var alertDiv = document.createElement("div");
-    alertDiv.className = "successalert";
+    alertDiv.className = "alert alertgreen";
     alertDiv.textContent = message;
 
     // Insert the alert above the form

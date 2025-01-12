@@ -2,15 +2,17 @@
     <%- include('./templates/head.ejs', {pageTitle: "Login"}) %>
     <body>
         <%- include('./templates/navbar.ejs') %>
-        <h1>Login</h1>
-        <form action="/user/login" method="post">
-            <input id="usernameInput" type="text" placeholder="Enter Username" name="username" required>
-            <input id="passwordInput" type="password" placeholder="Enter Password" name="password" required>
-            <button type="submit">Login</button>
-        </form>
-
-        <script src="public/js/form.js"></script>
-        <script src="public/js/sendLogin.js"></script>
-        <script src="public/js/login.js"></script>
+        <div class="container containermain">
+            <h1>Login</h1>
+            <form action="/user/login" method="post">
+                <input id="usernameInput" type="text" placeholder="Enter Username" name="username" required>
+                <input id="passwordInput" type="password" placeholder="Enter Password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+    
+            <script src="public/js/form.js"></script>
+            <script src="public/js/sendLogin.js"></script>
+            <script src="public/js/login.js"></script>
+        </div>
     </body>
 </html>
