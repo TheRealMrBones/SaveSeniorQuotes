@@ -43,6 +43,15 @@ const getAccessLvl = async (userId) => {
     }
 };
 
+const setAccessLvl = async (userId, accessLvl) => {
+    try {
+        return userModel.setAccessLvl(userId, accessLvl);
+    } catch (error) {
+        console.error('Error in setAccessLvl:', error);
+        return false;
+    }
+};
+
 const getUserById = async (userId) => {
     try {
         const user = await userModel.getUserById(userId);
@@ -260,6 +269,7 @@ module.exports = {
     verifyApiKey,
     newApiKey,
     getAccessLvl,
+    setAccessLvl,
     getUserById,
     getUsernameById,
     getUserByUsername,

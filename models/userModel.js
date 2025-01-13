@@ -62,6 +62,19 @@ const getAccessLvl = async (userId) => {
     }
 };
 
+const setAccessLvl = async (userId, accessLvl) => {
+    try {
+        await prisma.user.update({
+            where: { id: userId },
+            data: { accessLvl: accessLvl },
+        });
+        return true;
+    } catch (error) {
+        console.error('Error in setAccessLvl:', error);
+        return false;
+    }
+};
+
 const getUserByUsername = async (username) => {
     try {
         return await prisma.user.findUnique({ where: { username: username } });
@@ -261,6 +274,7 @@ module.exports = {
     getUserByApiKey,
     newApiKey,
     getAccessLvl,
+    setAccessLvl,
     getUserByUsername,
     getUsernameById,
     getUserById,
