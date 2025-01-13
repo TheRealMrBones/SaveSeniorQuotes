@@ -222,7 +222,7 @@ const getUsersPage = async (page, perPage, onlyaccepted, onlyreview) => {
         else if(onlyreview)
             where = { statusLvl: { equals: 1 } };
 
-        let orderBy = { lastname: 'asc' };
+        let orderBy = [{ lastname: 'asc' }, { firstname: 'asc' }];
         if (onlyreview)
             orderBy = { updatedAt: 'desc' };
 
