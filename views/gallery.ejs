@@ -18,6 +18,9 @@
                         quotelastname: q.lastname,
                         quotequote: q.quote,
                     }) %>
+                    <% if(accessLvl >= 1) { %>
+                        <p style="display: none;"><%=q.username%></p>
+                    <% } %>
                 <% }); %>
             </div>
             <% if(quotes.length >= 25) { %>

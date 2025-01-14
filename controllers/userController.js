@@ -233,12 +233,12 @@ const getQuotesPage = async (page, perPage, formods) => {
                 firstname: user.firstname,
                 lastname: user.lastname,
                 quote: user.quote,
+                username: user.username,
             }
 
             // only include user info if for mods
             if (formods) {
                 returnobject.userId = user.id;
-                returnobject.username = user.username;
             }
 
             return returnobject;

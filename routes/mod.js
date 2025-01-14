@@ -19,7 +19,7 @@ router.get('/review', async (req, res) => {
     res.locals.page = page;
     res.locals.quotes = await userController.getQuotesPage(page, 25, true);
 
-    res.render("review")
+    res.render("review");
 });
 
 router.post('/review', async (req, res) => {
@@ -28,6 +28,11 @@ router.post('/review', async (req, res) => {
     }
 
     let { userId, accept, reason } = req.body;
+
+    const user = await userController.getUserById(userId);
+    if(user === undefined || user.statusLvl != 1){
+        return res.status(201);
+    }
 
     const result = await userController.submitReview(userId, accept, reason);
 
