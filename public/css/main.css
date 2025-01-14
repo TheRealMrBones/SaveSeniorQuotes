@@ -101,8 +101,8 @@ button{
 }
 
 .picture{
-    width: 170px;
-    height: 230px;
+    width: 10.625rem;
+    height: 14.375rem;
     object-fit: cover;
 }
 
@@ -113,7 +113,8 @@ button{
     text-align: center;
     width: fit-content;
     margin: 5px;
-    width: 180px;
+    width: 11.25rem;
+    height: 21.25rem;
     vertical-align: top;
 }
 
