@@ -72,6 +72,19 @@ h2{
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.checkinput {
+    position: relative;
+    top: .1rem;
+    display: inline-block;
+    margin: 1rem auto;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
 button:hover{
     color: #fff;
     background-color: #0069d9;

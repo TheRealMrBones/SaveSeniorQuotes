@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var username = document.querySelector('[name="username"]').value;
         var password = document.querySelector('[name="password"]').value;
         var confirmPassword = document.querySelector('[name="confirmPassword"]').value;
+        var rememberme = document.querySelector('[name="rememberme"]').checked;
 
         // Check if passwords match
         if (password !== confirmPassword) {
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 201) {
                     // Registration successful
-                    sendLogin(username, password);
+                    sendLogin(username, password, rememberme);
                 } else {
                     var data = JSON.parse(xhr.responseText);
 
@@ -33,7 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Convert the data to JSON format
         var jsonData = JSON.stringify({
             username: username,
-            password: password
+            password: password,
+            rememberme: rememberme,
         });
 
         // Send the request

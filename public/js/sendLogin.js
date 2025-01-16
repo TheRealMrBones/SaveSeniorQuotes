@@ -6,7 +6,7 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
 
-function sendLogin(username, password) {
+function sendLogin(username, password, rememberme) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/user/login", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -38,7 +38,8 @@ function sendLogin(username, password) {
     // Convert the data to JSON format
     var jsonData = JSON.stringify({
         username: username,
-        password: password
+        password: password,
+        rememberme: rememberme,
     });
 
     // Send the request

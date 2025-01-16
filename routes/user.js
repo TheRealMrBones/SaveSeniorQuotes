@@ -60,7 +60,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/user/login', async (req, res) => {
-    let { username, password } = req.body;
+    let { username, password, rememberme } = req.body;
 
     // Sanitize username
     username = validator.trim(username);
@@ -75,7 +75,11 @@ router.post('/user/login', async (req, res) => {
 
     // Set cookie and update visit
     if (result.token) {
-        res.cookie("token", result.token);
+        if(rememberme){
+            res.cookie("token", result.token, { maxAge: 1000 * 60 * 60 * 24 });
+        }else{
+            res.cookie("token", result.token);
+        }
     }
 
     return res.status(result.error ? 401 : 200).json(result);

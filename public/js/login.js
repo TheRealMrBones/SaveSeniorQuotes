@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var username = document.getElementById("usernameInput").value;
         var password = document.getElementById("passwordInput").value;
+        var rememberme = document.getElementById("remembermeInput").checked;
 
-        sendLogin(username, password);
+        sendLogin(username, password, rememberme);
     });
 });
