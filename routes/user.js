@@ -13,7 +13,7 @@ const { env } = require('process');
 passport.use(new GoogleStrategy({
     clientID: env.CLIENT_ID,
     clientSecret: env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, done) {
     // Handle user profile here
