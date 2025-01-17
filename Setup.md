@@ -7,6 +7,8 @@
 ```
 DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
 SECRET_KEY="secretkey"
+CLIENT_ID="numbers-letters.apps.googleusercontent.com"
+CLIENT_SECRET="XXXXXX-XXXXXXXXXXXXXXXXXXXX-XX_XX_X"
 ```
 
 ### Update Database

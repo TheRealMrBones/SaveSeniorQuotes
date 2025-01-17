@@ -3,8 +3,23 @@ const router = express.Router();
 const validator = require('validator');
 const multer = require('multer');
 const fs = require('fs');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const userController = require('../controllers/userController');
+const { env } = require('process');
+
+// Setup google passport
+passport.use(new GoogleStrategy({
+    clientID: env.CLIENT_ID,
+    clientSecret: env.CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+    // Handle user profile here
+    return done(null, profile); 
+}
+));
 
 // Multer config
 const pictureUpload = multer({
@@ -84,6 +99,25 @@ router.post('/user/login', async (req, res) => {
 
     return res.status(result.error ? 401 : 200).json(result);
 });
+
+// Google login route
+router.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', 
+    passport.authenticate('google', { session: false, failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication
+
+        // Check if account already exists
+
+        // Access user information from req.user
+        const userEmail = req.user.emails[0].value;
+        const userName = req.user.displayName;
+        
+        // Redirect to profile page
+        res.redirect('/profile');
+    });
 
 // Profile route
 router.get('/profile', async (req, res) => {

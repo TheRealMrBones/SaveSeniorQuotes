@@ -100,6 +100,11 @@ const registerUser = async (username, password) => {
         return { error: 'Invalid username. It must be 3-20 characters only letters, numbers, and underscores.' };
     }
 
+    // Validate password
+    if (password.length < 3) {
+        return { error: 'Invalid password. It must be at least 3 characters long' };
+    }
+
     const existingUser = await userModel.getUserByUsername(username);
 
     if (existingUser) {
@@ -122,6 +127,11 @@ const loginUser = async (username, password) => {
     // Sanitize inputs
     username = sanitizeInput(username);
     password = sanitizeInput(password);
+
+    // Small password used for googleauth accounts
+    if (password.length < 3) {
+        return { error: 'Invalid username or password' };
+    }
 
     try {
         const user = await userModel.getUserByUsername(username);
