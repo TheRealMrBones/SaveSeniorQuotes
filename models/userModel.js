@@ -84,6 +84,15 @@ const getUserByUsername = async (username) => {
     }
 };
 
+const getUserByEmail = async (email) => {
+    try {
+        return await prisma.user.findUnique({ where: { email: email } });
+    } catch (error) {
+        console.error('Error in getUserByEmail:', error);
+        return null;
+    }
+};
+
 const getUsernameById = async (id) => {
     try {
         if (!id) {
@@ -138,6 +147,19 @@ const createUser = async ({ username, hashedPw }) => {
         return user;
     } catch (error) {
         console.error('Error in createUser:', error);
+        return null;
+    }
+};
+
+const createGoogleUser = async ({ email, username }) => {
+    try {
+        const apiKey = generateApiKey();
+        const user = await prisma.user.create({
+            data: { username, email, apiKey },
+        });
+        return user;
+    } catch (error) {
+        console.error('Error in createGoogleUser:', error);
         return null;
     }
 };
@@ -276,10 +298,12 @@ module.exports = {
     getAccessLvl,
     setAccessLvl,
     getUserByUsername,
+    getUserByEmail,
     getUsernameById,
     getUserById,
     getAllUsers,
     createUser,
+    createGoogleUser,
     updateUserPassword,
     deleteUserById,
     updateProfile,

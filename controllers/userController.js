@@ -82,6 +82,16 @@ const getUserByUsername = async (username) => {
     }
 };
 
+const getUserByEmail = async (email) => {
+    try {
+        const user = await userModel.getUserByEmail(email);
+        return user;
+    } catch (error) {
+        console.error('Error in getUserByEmail:', error);
+        throw error;
+    }
+};
+
 const getAllUsers = async () => {
     try {
         return await userModel.getAllUsers();
@@ -123,12 +133,32 @@ const registerUser = async (username, password) => {
     }
 };
 
+const registerGoogleUser = async (displayname, email) => {
+    displayname = sanitizeInput(displayname).toLowerCase().replace(/\s/g, '');
+    const randomNum = Math.floor(Math.random() * 9000) + 1000; // 1000-9999
+    const username = displayname + randomNum;
+
+    const existingUser = await userModel.getUserByEmail(email);
+
+    if (existingUser) {
+        return true;
+    }
+
+    try {
+        const user = await userModel.createGoogleUser({ email, username });
+
+        return true;
+    } catch (error) {
+        console.error('Error in registerGoogleUser:', error);
+        return false;
+    }
+};
+
 const loginUser = async (username, password) => {
     // Sanitize inputs
     username = sanitizeInput(username);
     password = sanitizeInput(password);
 
-    // Small password used for googleauth accounts
     if (password.length < 3) {
         return { error: 'Invalid username or password' };
     }
@@ -149,6 +179,23 @@ const loginUser = async (username, password) => {
         return { token };
     } catch (error) {
         console.error('Error in loginUser:', error);
+        throw error;
+    }
+};
+
+const loginGoogleUser = async (email) => {
+    try {
+        const user = await userModel.getUserByEmail(email);
+        const username = user.username;
+
+        if (!user) {
+            return { error: 'Invalid google account' };
+        }
+
+        const token = jwt.sign({ username }, process.env.SECRET_KEY, { expiresIn: '24h' });
+        return { token };
+    } catch (error) {
+        console.error('Error in loginGoogleUser:', error);
         throw error;
     }
 };
@@ -283,9 +330,12 @@ module.exports = {
     getUserById,
     getUsernameById,
     getUserByUsername,
+    getUserByEmail,
     getAllUsers,
     registerUser,
+    registerGoogleUser,
     loginUser,
+    loginGoogleUser,
     updateUserPassword,
     verifyToken,
     getUserByApiKey,

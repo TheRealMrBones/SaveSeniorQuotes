@@ -10,7 +10,7 @@
   "author": "Nolan Jones",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^6.1.0",
+    "@prisma/client": "^6.2.1",
     "argon2": "^0.41.1",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
@@ -26,6 +26,6 @@
     "validator": "^13.12.0"
   },
   "devDependencies": {
-    "prisma": "^6.2.0"
+    "prisma": "^6.2.1"
   }
 }

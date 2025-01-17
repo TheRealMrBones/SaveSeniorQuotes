@@ -106,14 +106,25 @@ router.get('/auth/google',
 
 router.get('/auth/google/callback', 
     passport.authenticate('google', { session: false, failureRedirect: '/login' }),
-    function(req, res) {
+    async function(req, res) {
         // Successful authentication
 
-        // Check if account already exists
-
         // Access user information from req.user
-        const userEmail = req.user.emails[0].value;
-        const userName = req.user.displayName;
+        const email = req.user.emails[0].value;
+        const displayname = req.user.displayName;
+
+        // Try to register user (makes new user if doesn't exist)
+        await userController.registerGoogleUser(displayname, email);
+
+        // Login to account
+        const result = await userController.loginGoogleUser(email);
+        if (result.token) {
+            res.cookie("token", result.token);
+        }else{
+            // Login still failed
+            res.redirect('/');
+            return;
+        }
         
         // Redirect to profile page
         res.redirect('/profile');
