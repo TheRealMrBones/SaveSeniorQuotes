@@ -3,8 +3,10 @@
         <img id="picturePreview" class="picture" src="<%=quotepicture%>" alt="current profile picture">
     <% } else { %>
         <img id="picturePreview" class="picture" src="/public/missingpicture.png" alt="current profile picture">
-    <% }%> <br>
+    <% }%>
 
-    <%=quotefirstname%> <%=quotelastname%> <br>
-    "<%=quotequote%>"
+    <p style="margin-top: .5rem;">
+        <%=quotefirstname%> <%=quotelastname%> <br>
+        "<%=quotequote%>"
+    </p>
 </div>
