@@ -43,6 +43,8 @@ app.use('/admin', adminRoutes);
 // Serve Homepage
 app.get('/', async (req, res) => {
     res.locals.quotes = await userController.getQuotesPage(1, 25, false);
+    res.locals.usercount = await userController.countAllUsers();
+    res.locals.quotecount = await userController.countUsersByStatus(3);
 
     const userId = res.locals.userId;
     const user = await userController.getUserById(userId);
