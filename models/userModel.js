@@ -138,6 +138,28 @@ const getAllUsers = async () => {
     }
 };
 
+const countAllUsers = async () => {
+    try {
+        return await prisma.user.count();
+    } catch (error) {
+        console.error('Error in countAllUsers:', error);
+        return null;
+    }
+};
+
+const countUsersByStatus = async (statusLvl) => {
+    try {
+        return await prisma.user.count({
+            where: {
+                statusLvl: statusLvl,
+            },
+        });
+    } catch (error) {
+        console.error('Error in countUsersByStatus:', error);
+        return null;
+    }
+};
+
 const createUser = async ({ username, hashedPw }) => {
     try {
         const apiKey = generateApiKey();
@@ -302,6 +324,8 @@ module.exports = {
     getUsernameById,
     getUserById,
     getAllUsers,
+    countAllUsers,
+    countUsersByStatus,
     createUser,
     createGoogleUser,
     updateUserPassword,

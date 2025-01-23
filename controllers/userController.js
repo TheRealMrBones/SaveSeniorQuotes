@@ -101,6 +101,24 @@ const getAllUsers = async () => {
     }
 };
 
+const countAllUsers = async () => {
+    try {
+        return await userModel.countAllUsers();
+    } catch (error) {
+        console.error('Error in countAllUsers:', error);
+        throw error;
+    }
+};
+
+const countUsersByStatus = async (statusLvl) => {
+    try {
+        return await userModel.countUsersByStatus(statusLvl);
+    } catch (error) {
+        console.error('Error in countUsersByStatus:', error);
+        throw error;
+    }
+};
+
 const registerUser = async (username, password) => {
     username = sanitizeInput(username).toLowerCase();
     password = sanitizeInput(password);
@@ -332,6 +350,8 @@ module.exports = {
     getUserByUsername,
     getUserByEmail,
     getAllUsers,
+    countAllUsers,
+    countUsersByStatus,
     registerUser,
     registerGoogleUser,
     loginUser,
