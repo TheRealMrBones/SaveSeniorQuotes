@@ -103,11 +103,7 @@ router.post('/user/login', async (req, res) => {
 
 // Google login route
 router.get('/auth/google',
-    passport.authenticate('google', {
-        scope: ['profile', 'email'],
-        callbackURL: "/auth/google/callback",
-        proxy: true,
-    }));
+    passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback', 
     passport.authenticate('google', { session: false, failureRedirect: '/login' }),
