@@ -16,6 +16,7 @@ const userController = require('./controllers/userController');
 const app = express();
 const port = 3000;
 
+app.set('trust proxy', true);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
